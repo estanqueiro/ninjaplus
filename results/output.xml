@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.13.2 on win32)" generated="2025-02-11T22:37:21.982074" rpa="false" schemaversion="5">
+<suite id="s1" name="Specs" source="C:\QAx\projects\ninjaplus\specs">
+<suite id="s1-s1" name="Login" source="C:\QAx\projects\ninjaplus\specs\login.robot">
+<test id="s1-s1-t1" name="Login com sucesso" line="7">
+<kw name="Fazendo login com &quot;estanqueiro@ninjaplus.com&quot; e senha &quot;pwd123&quot;" owner="login_steps" source_name="Fazendo login com &quot;${email}&quot; e senha &quot;${pass}&quot;">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-02-11T22:37:22.374537" level="INFO">Opening browser 'chrome' to base url 'http://ninjaplus-web:5000/login'.</msg>
+<arg>http://ninjaplus-web:5000/login</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-02-11T22:37:22.374287" elapsed="2.347151"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-02-11T22:37:24.722659" level="INFO">Typing text 'estanqueiro@ninjaplus.com' into text field 'id=emailId'.</msg>
+<arg>id=emailId</arg>
+<arg>${email}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-11T22:37:24.721822" elapsed="0.240016"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-02-11T22:37:24.962626" level="INFO">Typing password into text field 'id=passId'.</msg>
+<msg time="2025-02-11T22:37:25.009545" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=passId</arg>
+<arg>${pass}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-11T22:37:24.962177" elapsed="0.153529"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-02-11T22:37:25.116252" level="INFO">Clicking button 'Entrar'.</msg>
+<arg>Entrar</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-11T22:37:25.115925" elapsed="0.120670"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-02-11T22:37:30.238385" level="INFO">Slept 5 seconds.</msg>
+<arg>5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-02-11T22:37:25.236976" elapsed="5.001784"/>
+</kw>
+<status status="PASS" start="2025-02-11T22:37:22.373546" elapsed="7.865650"/>
+</kw>
+<kw name="Devo ver o meu nome &quot;Paulo Estanqueiro&quot; na área logada" owner="login_steps" source_name="Devo ver o meu nome &quot;${username}&quot; na área logada">
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>${username}</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-02-11T22:37:30.242238" elapsed="0.053116"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-02-11T22:37:30.295613" elapsed="2.347723"/>
+</kw>
+<status status="PASS" start="2025-02-11T22:37:30.240957" elapsed="2.403248"/>
+</kw>
+<status status="PASS" start="2025-02-11T22:37:22.372689" elapsed="10.273303"/>
+</test>
+<doc>O usuário informa suas credenciais de acesso e submete o formulário de login</doc>
+<status status="PASS" start="2025-02-11T22:37:22.021719" elapsed="10.629040"/>
+</suite>
+<status status="PASS" start="2025-02-11T22:37:21.984044" elapsed="10.672556"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Specs" id="s1" pass="1" fail="0" skip="0">Specs</stat>
+<stat name="Login" id="s1-s1" pass="1" fail="0" skip="0">Specs.Login</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
