@@ -1,73 +1,336 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2.2 (Python 3.13.2 on win32)" generated="2025-02-11T22:37:21.982074" rpa="false" schemaversion="5">
+<robot generator="Robot 7.2.2 (Python 3.13.2 on win32)" generated="2025-02-12T00:28:02.251536" rpa="false" schemaversion="5">
 <suite id="s1" name="Specs" source="C:\QAx\projects\ninjaplus\specs">
 <suite id="s1-s1" name="Login" source="C:\QAx\projects\ninjaplus\specs\login.robot">
-<test id="s1-s1-t1" name="Login com sucesso" line="7">
-<kw name="Fazendo login com &quot;estanqueiro@ninjaplus.com&quot; e senha &quot;pwd123&quot;" owner="login_steps" source_name="Fazendo login com &quot;${email}&quot; e senha &quot;${pass}&quot;">
+<test id="s1-s1-t1" name="Login com sucesso" line="10">
+<kw name="Abrir navegador" owner="login_steps" type="SETUP">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-02-11T22:37:22.374537" level="INFO">Opening browser 'chrome' to base url 'http://ninjaplus-web:5000/login'.</msg>
+<msg time="2025-02-12T00:28:02.594307" level="INFO">Opening browser 'chrome' to base url 'http://ninjaplus-web:5000/login'.</msg>
 <arg>http://ninjaplus-web:5000/login</arg>
 <arg>chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-02-11T22:37:22.374287" elapsed="2.347151"/>
+<status status="PASS" start="2025-02-12T00:28:02.593805" elapsed="2.569727"/>
 </kw>
+<kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
+<arg>10</arg>
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<status status="PASS" start="2025-02-12T00:28:05.163818" elapsed="0.001462"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-02-12T00:28:05.165545" elapsed="0.038378"/>
+</kw>
+<status status="PASS" start="2025-02-12T00:28:02.593064" elapsed="2.611022"/>
+</kw>
+<kw name="Fazendo login com &quot;estanqueiro@ninjaplus.com&quot; e senha &quot;pwd123&quot;" owner="login_steps" source_name="Fazendo login com &quot;${email}&quot; e senha &quot;${pass}&quot;">
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-02-11T22:37:24.722659" level="INFO">Typing text 'estanqueiro@ninjaplus.com' into text field 'id=emailId'.</msg>
-<arg>id=emailId</arg>
+<msg time="2025-02-12T00:28:05.205980" level="INFO">Typing text 'estanqueiro@ninjaplus.com' into text field 'id:emailId'.</msg>
+<arg>id:emailId</arg>
 <arg>${email}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-02-11T22:37:24.721822" elapsed="0.240016"/>
+<status status="PASS" start="2025-02-12T00:28:05.205427" elapsed="0.249029"/>
 </kw>
 <kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-02-11T22:37:24.962626" level="INFO">Typing password into text field 'id=passId'.</msg>
-<msg time="2025-02-11T22:37:25.009545" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id=passId</arg>
+<msg time="2025-02-12T00:28:05.456279" level="INFO">Typing password into text field 'id:passId'.</msg>
+<msg time="2025-02-12T00:28:05.507553" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:passId</arg>
 <arg>${pass}</arg>
 <doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-02-11T22:37:24.962177" elapsed="0.153529"/>
+<status status="PASS" start="2025-02-12T00:28:05.455461" elapsed="0.151471"/>
 </kw>
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-02-11T22:37:25.116252" level="INFO">Clicking button 'Entrar'.</msg>
-<arg>Entrar</arg>
+<msg time="2025-02-12T00:28:05.607405" level="INFO">Clicking button 'id:login'.</msg>
+<arg>id:login</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-02-11T22:37:25.115925" elapsed="0.120670"/>
+<status status="PASS" start="2025-02-12T00:28:05.607171" elapsed="0.104499"/>
 </kw>
-<kw name="Sleep" owner="BuiltIn">
-<msg time="2025-02-11T22:37:30.238385" level="INFO">Slept 5 seconds.</msg>
-<arg>5</arg>
-<doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2025-02-11T22:37:25.236976" elapsed="5.001784"/>
-</kw>
-<status status="PASS" start="2025-02-11T22:37:22.373546" elapsed="7.865650"/>
+<status status="PASS" start="2025-02-12T00:28:05.204736" elapsed="0.507175"/>
 </kw>
 <kw name="Devo ver o meu nome &quot;Paulo Estanqueiro&quot; na área logada" owner="login_steps" source_name="Devo ver o meu nome &quot;${username}&quot; na área logada">
-<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:.user .info span</arg>
 <arg>${username}</arg>
-<doc>Waits until ``text`` appears on the current page.</doc>
-<status status="PASS" start="2025-02-11T22:37:30.242238" elapsed="0.053116"/>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2025-02-12T00:28:05.712850" elapsed="0.667072"/>
 </kw>
+<status status="PASS" start="2025-02-12T00:28:05.712422" elapsed="0.667622"/>
+</kw>
+<kw name="Fechar navegador" owner="login_steps" type="TEARDOWN">
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2025-02-11T22:37:30.295613" elapsed="2.347723"/>
+<status status="PASS" start="2025-02-12T00:28:06.381045" elapsed="2.206925"/>
 </kw>
-<status status="PASS" start="2025-02-11T22:37:30.240957" elapsed="2.403248"/>
+<status status="PASS" start="2025-02-12T00:28:06.380647" elapsed="2.207450"/>
 </kw>
-<status status="PASS" start="2025-02-11T22:37:22.372689" elapsed="10.273303"/>
+<status status="PASS" start="2025-02-12T00:28:02.592169" elapsed="5.996285"/>
+</test>
+<test id="s1-s1-t2" name="Email deve ser requerido" line="14">
+<kw name="Abrir navegador" owner="login_steps" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-02-12T00:28:08.590471" level="INFO">Opening browser 'chrome' to base url 'http://ninjaplus-web:5000/login'.</msg>
+<arg>http://ninjaplus-web:5000/login</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-02-12T00:28:08.590320" elapsed="2.397924"/>
+</kw>
+<kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
+<arg>10</arg>
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<status status="PASS" start="2025-02-12T00:28:10.988495" elapsed="0.001474"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-02-12T00:28:10.990244" elapsed="0.034601"/>
+</kw>
+<status status="PASS" start="2025-02-12T00:28:08.590050" elapsed="2.435004"/>
+</kw>
+<kw name="Fazendo login com &quot;&quot; e senha &quot;pwd123&quot;" owner="login_steps" source_name="Fazendo login com &quot;${email}&quot; e senha &quot;${pass}&quot;">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-02-12T00:28:11.027049" level="INFO">Typing text '' into text field 'id:emailId'.</msg>
+<arg>id:emailId</arg>
+<arg>${email}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-12T00:28:11.026315" elapsed="0.116483"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-02-12T00:28:11.143245" level="INFO">Typing password into text field 'id:passId'.</msg>
+<msg time="2025-02-12T00:28:11.202597" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:passId</arg>
+<arg>${pass}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-12T00:28:11.142999" elapsed="0.191430"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-02-12T00:28:11.335092" level="INFO">Clicking button 'id:login'.</msg>
+<arg>id:login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-12T00:28:11.334761" elapsed="0.128443"/>
+</kw>
+<status status="PASS" start="2025-02-12T00:28:11.025587" elapsed="0.437759"/>
+</kw>
+<kw name="Devo ver a seguinte mensagem de alerta &quot;Opps. Cadê o email?&quot;" owner="login_steps" source_name="Devo ver a seguinte mensagem de alerta &quot;${expected_message}&quot;">
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:.alert</arg>
+<arg>${expected_message}</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2025-02-12T00:28:11.464207" elapsed="0.033404"/>
+</kw>
+<status status="PASS" start="2025-02-12T00:28:11.463850" elapsed="0.033941"/>
+</kw>
+<kw name="Fechar navegador" owner="login_steps" type="TEARDOWN">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-02-12T00:28:11.498788" elapsed="2.271115"/>
+</kw>
+<status status="PASS" start="2025-02-12T00:28:11.498324" elapsed="2.271826"/>
+</kw>
+<status status="PASS" start="2025-02-12T00:28:08.589534" elapsed="5.180940"/>
+</test>
+<test id="s1-s1-t3" name="Senha deve ser requerido" line="18">
+<kw name="Abrir navegador" owner="login_steps" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-02-12T00:28:13.772807" level="INFO">Opening browser 'chrome' to base url 'http://ninjaplus-web:5000/login'.</msg>
+<arg>http://ninjaplus-web:5000/login</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-02-12T00:28:13.772611" elapsed="2.334743"/>
+</kw>
+<kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
+<arg>10</arg>
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<status status="PASS" start="2025-02-12T00:28:16.107689" elapsed="0.001472"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-02-12T00:28:16.109418" elapsed="0.034258"/>
+</kw>
+<status status="PASS" start="2025-02-12T00:28:13.772298" elapsed="2.371870"/>
+</kw>
+<kw name="Fazendo login com &quot;estanqueiro@ninjaplus.com&quot; e senha &quot;&quot;" owner="login_steps" source_name="Fazendo login com &quot;${email}&quot; e senha &quot;${pass}&quot;">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-02-12T00:28:16.146357" level="INFO">Typing text 'estanqueiro@ninjaplus.com' into text field 'id:emailId'.</msg>
+<arg>id:emailId</arg>
+<arg>${email}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-12T00:28:16.146027" elapsed="0.245733"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-02-12T00:28:16.392421" level="INFO">Typing password into text field 'id:passId'.</msg>
+<msg time="2025-02-12T00:28:16.446611" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:passId</arg>
+<arg>${pass}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-12T00:28:16.392051" elapsed="0.117516"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-02-12T00:28:16.509960" level="INFO">Clicking button 'id:login'.</msg>
+<arg>id:login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-12T00:28:16.509764" elapsed="0.110094"/>
+</kw>
+<status status="PASS" start="2025-02-12T00:28:16.145190" elapsed="0.474832"/>
+</kw>
+<kw name="Devo ver a seguinte mensagem de alerta &quot;Opps. Cadê a senha?&quot;" owner="login_steps" source_name="Devo ver a seguinte mensagem de alerta &quot;${expected_message}&quot;">
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:.alert</arg>
+<arg>${expected_message}</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2025-02-12T00:28:16.621314" elapsed="0.032178"/>
+</kw>
+<status status="PASS" start="2025-02-12T00:28:16.620726" elapsed="0.032959"/>
+</kw>
+<kw name="Fechar navegador" owner="login_steps" type="TEARDOWN">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-02-12T00:28:16.655400" elapsed="2.265004"/>
+</kw>
+<status status="PASS" start="2025-02-12T00:28:16.654511" elapsed="2.266351"/>
+</kw>
+<status status="PASS" start="2025-02-12T00:28:13.771745" elapsed="5.149974"/>
 </test>
 <doc>O usuário informa suas credenciais de acesso e submete o formulário de login</doc>
-<status status="PASS" start="2025-02-11T22:37:22.021719" elapsed="10.629040"/>
+<status status="PASS" start="2025-02-12T00:28:02.288263" elapsed="16.636878"/>
 </suite>
-<status status="PASS" start="2025-02-11T22:37:21.984044" elapsed="10.672556"/>
+<suite id="s1-s2" name="Login Sem Sucesso" source="C:\QAx\projects\ninjaplus\specs\login_sem_sucesso.robot">
+<test id="s1-s2-t1" name="Senha inválida" line="11">
+<kw name="Abrir navegador" owner="login_steps" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-02-12T00:28:18.933268" level="INFO">Opening browser 'chrome' to base url 'http://ninjaplus-web:5000/login'.</msg>
+<arg>http://ninjaplus-web:5000/login</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-02-12T00:28:18.933099" elapsed="2.337518"/>
+</kw>
+<kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
+<arg>10</arg>
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<status status="PASS" start="2025-02-12T00:28:21.271258" elapsed="0.002439"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-02-12T00:28:21.273963" elapsed="0.032958"/>
+</kw>
+<status status="PASS" start="2025-02-12T00:28:18.932774" elapsed="2.374274"/>
+</kw>
+<kw name="Logando com credenciais inválidas devo ver uma mensagem de alerta" owner="login_steps">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-02-12T00:28:21.308096" level="INFO">Typing text 'estanqueiro@ninjaplus.com' into text field 'id:emailId'.</msg>
+<arg>id:emailId</arg>
+<arg>${email}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-12T00:28:21.307897" elapsed="0.247724"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-02-12T00:28:21.557659" level="INFO">Typing password into text field 'id:passId'.</msg>
+<msg time="2025-02-12T00:28:21.634078" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:passId</arg>
+<arg>${pass}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-12T00:28:21.556685" elapsed="0.165141"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-02-12T00:28:21.722314" level="INFO">Clicking button 'id:login'.</msg>
+<arg>id:login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-12T00:28:21.722037" elapsed="0.128616"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:.alert</arg>
+<arg>${expected_message}</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2025-02-12T00:28:21.851007" elapsed="0.268989"/>
+</kw>
+<arg>estanqueiro@ninjaplus.com</arg>
+<arg>asdfg</arg>
+<arg>Usuário e/ou senha inválidos</arg>
+<status status="PASS" start="2025-02-12T00:28:21.307484" elapsed="0.812772"/>
+</kw>
+<kw name="Fechar navegador" owner="login_steps" type="TEARDOWN">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-02-12T00:28:22.121465" elapsed="2.216768"/>
+</kw>
+<status status="PASS" start="2025-02-12T00:28:22.120962" elapsed="2.217432"/>
+</kw>
+<status status="PASS" start="2025-02-12T00:28:18.931994" elapsed="5.406736"/>
+</test>
+<test id="s1-s2-t2" name="Usuário não cadastra" line="12">
+<kw name="Abrir navegador" owner="login_steps" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-02-12T00:28:24.341022" level="INFO">Opening browser 'chrome' to base url 'http://ninjaplus-web:5000/login'.</msg>
+<arg>http://ninjaplus-web:5000/login</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-02-12T00:28:24.340851" elapsed="2.317654"/>
+</kw>
+<kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
+<arg>10</arg>
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<status status="PASS" start="2025-02-12T00:28:26.658803" elapsed="0.001546"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-02-12T00:28:26.660638" elapsed="0.029807"/>
+</kw>
+<status status="PASS" start="2025-02-12T00:28:24.340554" elapsed="2.350074"/>
+</kw>
+<kw name="Logando com credenciais inválidas devo ver uma mensagem de alerta" owner="login_steps">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-02-12T00:28:26.692098" level="INFO">Typing text 'padrekevedo@nokziste.com' into text field 'id:emailId'.</msg>
+<arg>id:emailId</arg>
+<arg>${email}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-12T00:28:26.691710" elapsed="0.239546"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-02-12T00:28:26.931802" level="INFO">Typing password into text field 'id:passId'.</msg>
+<msg time="2025-02-12T00:28:26.982731" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:passId</arg>
+<arg>${pass}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-12T00:28:26.931483" elapsed="0.153332"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-02-12T00:28:27.085501" level="INFO">Clicking button 'id:login'.</msg>
+<arg>id:login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-12T00:28:27.085145" elapsed="0.137731"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>css:.alert</arg>
+<arg>${expected_message}</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2025-02-12T00:28:27.223462" elapsed="0.256774"/>
+</kw>
+<arg>padrekevedo@nokziste.com</arg>
+<arg>pwd123</arg>
+<arg>Usuário e/ou senha inválidos</arg>
+<status status="PASS" start="2025-02-12T00:28:26.691138" elapsed="0.789347"/>
+</kw>
+<kw name="Fechar navegador" owner="login_steps" type="TEARDOWN">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-02-12T00:28:27.481175" elapsed="2.207910"/>
+</kw>
+<status status="PASS" start="2025-02-12T00:28:27.480888" elapsed="2.208596"/>
+</kw>
+<status status="PASS" start="2025-02-12T00:28:24.339993" elapsed="5.350230"/>
+</test>
+<doc>O usuário informa suas credenciais de acesso e submete o formulário de login</doc>
+<status status="PASS" start="2025-02-12T00:28:18.926921" elapsed="10.766879"/>
+</suite>
+<status status="PASS" start="2025-02-12T00:28:02.253442" elapsed="27.445202"/>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0" skip="0">All Tests</stat>
+<stat pass="5" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat name="Specs" id="s1" pass="1" fail="0" skip="0">Specs</stat>
-<stat name="Login" id="s1-s1" pass="1" fail="0" skip="0">Specs.Login</stat>
+<stat name="Specs" id="s1" pass="5" fail="0" skip="0">Specs</stat>
+<stat name="Login" id="s1-s1" pass="3" fail="0" skip="0">Specs.Login</stat>
+<stat name="Login Sem Sucesso" id="s1-s2" pass="2" fail="0" skip="0">Specs.Login Sem Sucesso</stat>
 </suite>
 </statistics>
 <errors>
