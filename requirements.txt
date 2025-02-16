@@ -1,0 +1,6 @@
+psycopg2
+requests
+robotframework
+robotframework-jsonlibrary
+robotframework-requests
+robotframework-seleniumlibrary
