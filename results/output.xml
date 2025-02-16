@@ -1,336 +1,1799 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2.2 (Python 3.13.2 on win32)" generated="2025-02-12T00:28:02.251536" rpa="false" schemaversion="5">
+<robot generator="Robot 7.2.2 (Python 3.13.2 on win32)" generated="2025-02-16T18:59:02.462384" rpa="false" schemaversion="5">
 <suite id="s1" name="Specs" source="C:\QAx\projects\ninjaplus\specs">
-<suite id="s1-s1" name="Login" source="C:\QAx\projects\ninjaplus\specs\login.robot">
-<test id="s1-s1-t1" name="Login com sucesso" line="10">
-<kw name="Abrir navegador" owner="login_steps" type="SETUP">
+<suite id="s1-s1" name="Api" source="C:\QAx\projects\ninjaplus\specs\api">
+<suite id="s1-s1-s1" name="Delete User" source="C:\QAx\projects\ninjaplus\specs\api\delete_user.robot">
+<test id="s1-s1-s1-t1" name="Unique Id" line="9">
+<kw name="Remove User By Email" owner="db">
+<arg>estanqueiro@yahoo.com</arg>
+<status status="PASS" start="2025-02-16T18:59:03.087846" elapsed="0.042050"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.132852" level="INFO">&amp;{user} = { full_name=Estanqueiro | email=estanqueiro@yahoo.com | password=pwd123 }</msg>
+<var>&amp;{user}</var>
+<arg>full_name=Estanqueiro</arg>
+<arg>email=estanqueiro@yahoo.com</arg>
+<arg>password=pwd123</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.130824" elapsed="0.002179"/>
+</kw>
+<kw name="Post User Return Id" owner="base_api">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.135970" level="INFO">Creating Session using : alias=nplus, url=http://ninjaplus-api:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:59:03.135537" elapsed="0.000866"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.137164" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.136766" elapsed="0.000441"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.252274" level="INFO">POST Request : url=http://ninjaplus-api:3000/user 
+ path_url=/user 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '67', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=full_name=Estanqueiro&amp;email=estanqueiro%40yahoo.com&amp;password=pwd123 
+ </msg>
+<msg time="2025-02-16T18:59:03.252366" level="INFO">POST Response : url=http://ninjaplus-api:3000/user 
+ status=200, reason=OK 
+ headers={'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'SAMEORIGIN', 'X-Download-Options': 'noopen', 'X-XSS-Protection': '1; mode=block', 'Access-Control-Allow-Origin': '*', 'Access-Control-Expose-Headers': 'Authorization', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '256', 'ETag': 'W/"100-ghEe1pUU3E9IaBr3w9bViHpcAt0"', 'Vary': 'Accept-Encoding', 'Date': 'Sun, 16 Feb 2025 18:59:03 GMT', 'Connection': 'keep-alive'} 
+ body={
+    "id": 59,
+    "full_name": "Estanqueiro",
+    "email": "estanqueiro@yahoo.com",
+    "password": "$2b$10$A3oxSF4V8bFocER2BUU2Pu6R5PlicMzxzlUkTTXz6w91/hr5ZB66O",
+    "updatedAt": "2025-02-16T18:59:03.148Z",
+    "createdAt": "2025-02-16T18:59:03.148Z"
+} 
+ </msg>
+<msg time="2025-02-16T18:59:03.252508" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSION}</arg>
+<arg>${ROUTE_USER}</arg>
+<arg>data=${body}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.137391" elapsed="0.115144"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.253254" level="INFO">${user_id} = 59</msg>
+<var>${user_id}</var>
+<arg>${response.json()['id']}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.252676" elapsed="0.000603"/>
+</kw>
+<return>
+<value>${user_id}</value>
+<status status="PASS" start="2025-02-16T18:59:03.253341" elapsed="0.000065"/>
+</return>
+<msg time="2025-02-16T18:59:03.253602" level="INFO">${user_id} = 59</msg>
+<var>${user_id}</var>
+<arg>${user}</arg>
+<status status="PASS" start="2025-02-16T18:59:03.134370" elapsed="0.119257"/>
+</kw>
+<kw name="Delete User" owner="base_api">
+<kw name="Get Admin Token" owner="base_api">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.254964" level="INFO">Creating Session using : alias=nplus, url=http://ninjaplus-api:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:59:03.254831" elapsed="0.000281"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.255617" level="INFO">&amp;{body} = { email=estanqueiro@ninjaplus.com | password=pwd123 }</msg>
+<var>&amp;{body}</var>
+<arg>email=estanqueiro@ninjaplus.com</arg>
+<arg>password=pwd123</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.255213" elapsed="0.000462"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.353930" level="INFO">POST Request : url=http://ninjaplus-api:3000/auth 
+ path_url=/auth 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '49', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=email=estanqueiro%40ninjaplus.com&amp;password=pwd123 
+ </msg>
+<msg time="2025-02-16T18:59:03.354016" level="INFO">POST Response : url=http://ninjaplus-api:3000/auth 
+ status=200, reason=OK 
+ headers={'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'SAMEORIGIN', 'X-Download-Options': 'noopen', 'X-XSS-Protection': '1; mode=block', 'Access-Control-Allow-Origin': '*', 'Access-Control-Expose-Headers': 'Authorization', 'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy4zNTErMDA6MDAifQ.zlY6HjpnXnfPKGxR4epI-CLigTEPUiitZ4UkYA8IGGY', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '230', 'ETag': 'W/"e6-IK40hJPujqiqIaqccBsKh5I0cMk"', 'Vary': 'Accept-Encoding', 'Date': 'Sun, 16 Feb 2025 18:59:03 GMT', 'Connection': 'keep-alive'} 
+ body={
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy4zNTErMDA6MDAifQ.zlY6HjpnXnfPKGxR4epI-CLigTEPUiitZ4UkYA8IGGY",
+    "expire": "2025-02-16T19:04:03.351+00:00",
+    "userId": 1
+} 
+ </msg>
+<msg time="2025-02-16T18:59:03.354130" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSION}</arg>
+<arg>${ROUTE_AUTH}</arg>
+<arg>data=${body}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.255816" elapsed="0.098338"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.354873" level="INFO">${token} = JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy4zNTErMDA6MDAifQ.zlY6HjpnXnfPKGxR4epI-CLigTEPUiitZ4UkYA8IGGY</msg>
+<var>${token}</var>
+<arg>JWT ${response.json()['token']}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.354297" elapsed="0.000602"/>
+</kw>
+<return>
+<value>${token}</value>
+<status status="PASS" start="2025-02-16T18:59:03.354949" elapsed="0.000064"/>
+</return>
+<msg time="2025-02-16T18:59:03.355205" level="INFO">${token} = JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy4zNTErMDA6MDAifQ.zlY6HjpnXnfPKGxR4epI-CLigTEPUiitZ4UkYA8IGGY</msg>
+<var>${token}</var>
+<status status="PASS" start="2025-02-16T18:59:03.254583" elapsed="0.100660"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.355701" level="INFO">Creating Session using : alias=nplus, url=http://ninjaplus-api:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:59:03.355494" elapsed="0.000341"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.356156" level="INFO">&amp;{headers} = { Content-Type=application/json | Authorization=JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy4zNTErMDA6MDAifQ.zlY6HjpnXnfPKGxR4epI-CLigTEPUiitZ4UkYA8IGGY ...</msg>
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.355945" elapsed="0.000236"/>
+</kw>
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.398371" level="INFO">DELETE Request : url=http://ninjaplus-api:3000/user/59 
+ path_url=/user/59 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy4zNTErMDA6MDAifQ.zlY6HjpnXnfPKGxR4epI-CLigTEPUiitZ4UkYA8IGGY', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-02-16T18:59:03.398479" level="INFO">DELETE Response : url=http://ninjaplus-api:3000/user/59 
+ status=204, reason=No Content 
+ headers={'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'SAMEORIGIN', 'X-Download-Options': 'noopen', 'X-XSS-Protection': '1; mode=block', 'Access-Control-Allow-Origin': '*', 'Access-Control-Expose-Headers': 'Authorization', 'ETag': 'W/"a-bAsFyilMr4Ra1hIU5PyoyFRunpI"', 'Date': 'Sun, 16 Feb 2025 18:59:03 GMT', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-02-16T18:59:03.398606" level="INFO">${response} = &lt;Response [204]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSION}</arg>
+<arg>${ROUTE_USER}/${user_id}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.356324" elapsed="0.042307"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-02-16T18:59:03.398710" elapsed="0.000038"/>
+</return>
+<msg time="2025-02-16T18:59:03.398871" level="INFO">${response} = &lt;Response [204]&gt;</msg>
+<var>${response}</var>
+<arg>${user_id}</arg>
+<status status="PASS" start="2025-02-16T18:59:03.254146" elapsed="0.144748"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.399972" level="INFO">${code} = 204</msg>
+<var>${code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.399329" elapsed="0.000668"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${code}</arg>
+<arg>204</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.400374" elapsed="0.000170"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:03.086930" elapsed="0.313896"/>
+</test>
+<test id="s1-s1-s1-t2" name="User not found" line="17">
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.402741" level="INFO">${user_id} = 9999</msg>
+<var>${user_id}</var>
+<arg>9999</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.402600" elapsed="0.000166"/>
+</kw>
+<kw name="Delete User" owner="base_api">
+<kw name="Get Admin Token" owner="base_api">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.403846" level="INFO">Creating Session using : alias=nplus, url=http://ninjaplus-api:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:59:03.403709" elapsed="0.000262"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.404324" level="INFO">&amp;{body} = { email=estanqueiro@ninjaplus.com | password=pwd123 }</msg>
+<var>&amp;{body}</var>
+<arg>email=estanqueiro@ninjaplus.com</arg>
+<arg>password=pwd123</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.404092" elapsed="0.000256"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.505388" level="INFO">POST Request : url=http://ninjaplus-api:3000/auth 
+ path_url=/auth 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '49', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=email=estanqueiro%40ninjaplus.com&amp;password=pwd123 
+ </msg>
+<msg time="2025-02-16T18:59:03.505478" level="INFO">POST Response : url=http://ninjaplus-api:3000/auth 
+ status=200, reason=OK 
+ headers={'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'SAMEORIGIN', 'X-Download-Options': 'noopen', 'X-XSS-Protection': '1; mode=block', 'Access-Control-Allow-Origin': '*', 'Access-Control-Expose-Headers': 'Authorization', 'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy41MDMrMDA6MDAifQ.0o_tIZCsiLfUwatqk0snczHKDyYAiJNkNRG03MHKyLY', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '230', 'ETag': 'W/"e6-oGxvnOXJyfH/yUvMTKsh9Au96KM"', 'Vary': 'Accept-Encoding', 'Date': 'Sun, 16 Feb 2025 18:59:03 GMT', 'Connection': 'keep-alive'} 
+ body={
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy41MDMrMDA6MDAifQ.0o_tIZCsiLfUwatqk0snczHKDyYAiJNkNRG03MHKyLY",
+    "expire": "2025-02-16T19:04:03.503+00:00",
+    "userId": 1
+} 
+ </msg>
+<msg time="2025-02-16T18:59:03.505584" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSION}</arg>
+<arg>${ROUTE_AUTH}</arg>
+<arg>data=${body}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.404448" elapsed="0.101160"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.506318" level="INFO">${token} = JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy41MDMrMDA6MDAifQ.0o_tIZCsiLfUwatqk0snczHKDyYAiJNkNRG03MHKyLY</msg>
+<var>${token}</var>
+<arg>JWT ${response.json()['token']}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.505764" elapsed="0.000593"/>
+</kw>
+<return>
+<value>${token}</value>
+<status status="PASS" start="2025-02-16T18:59:03.506405" elapsed="0.000032"/>
+</return>
+<msg time="2025-02-16T18:59:03.506571" level="INFO">${token} = JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy41MDMrMDA6MDAifQ.0o_tIZCsiLfUwatqk0snczHKDyYAiJNkNRG03MHKyLY</msg>
+<var>${token}</var>
+<status status="PASS" start="2025-02-16T18:59:03.403467" elapsed="0.103127"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.506823" level="INFO">Creating Session using : alias=nplus, url=http://ninjaplus-api:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:59:03.506686" elapsed="0.000334"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.507912" level="INFO">&amp;{headers} = { Content-Type=application/json | Authorization=JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy41MDMrMDA6MDAifQ.0o_tIZCsiLfUwatqk0snczHKDyYAiJNkNRG03MHKyLY ...</msg>
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.507494" elapsed="0.000448"/>
+</kw>
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.548259" level="INFO">DELETE Request : url=http://ninjaplus-api:3000/user/9999 
+ path_url=/user/9999 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy41MDMrMDA6MDAifQ.0o_tIZCsiLfUwatqk0snczHKDyYAiJNkNRG03MHKyLY', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-02-16T18:59:03.548346" level="INFO">DELETE Response : url=http://ninjaplus-api:3000/user/9999 
+ status=404, reason=Not Found 
+ headers={'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'SAMEORIGIN', 'X-Download-Options': 'noopen', 'X-XSS-Protection': '1; mode=block', 'Access-Control-Allow-Origin': '*', 'Access-Control-Expose-Headers': 'Authorization', 'Content-Type': 'text/plain; charset=utf-8', 'Content-Length': '9', 'ETag': 'W/"9-0gXL1ngzMqISxa6S1zx3F4wtLyg"', 'Vary': 'Accept-Encoding', 'Date': 'Sun, 16 Feb 2025 18:59:03 GMT', 'Connection': 'keep-alive'} 
+ body=Not Found 
+ </msg>
+<msg time="2025-02-16T18:59:03.548522" level="INFO">${response} = &lt;Response [404]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSION}</arg>
+<arg>${ROUTE_USER}/${user_id}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.508046" elapsed="0.040499"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-02-16T18:59:03.548614" elapsed="0.000039"/>
+</return>
+<msg time="2025-02-16T18:59:03.548776" level="INFO">${response} = &lt;Response [404]&gt;</msg>
+<var>${response}</var>
+<arg>${user_id}</arg>
+<status status="PASS" start="2025-02-16T18:59:03.403168" elapsed="0.145630"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.549919" level="INFO">${code} = 404</msg>
+<var>${code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.549206" elapsed="0.000742"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${code}</arg>
+<arg>404</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.550309" elapsed="0.000157"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:03.402120" elapsed="0.148626"/>
+</test>
+<status status="PASS" start="2025-02-16T18:59:02.503445" elapsed="1.048851"/>
+</suite>
+<suite id="s1-s1-s2" name="Get User" source="C:\QAx\projects\ninjaplus\specs\api\get_user.robot">
+<test id="s1-s1-s2-t1" name="Unique Id" line="8">
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.560028" level="INFO">${user_id} = 1</msg>
+<var>${user_id}</var>
+<arg>1</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.559754" elapsed="0.000333"/>
+</kw>
+<kw name="Get Admin Token" owner="base_api">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.560925" level="INFO">Creating Session using : alias=nplus, url=http://ninjaplus-api:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:59:03.560760" elapsed="0.000337"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.561440" level="INFO">&amp;{body} = { email=estanqueiro@ninjaplus.com | password=pwd123 }</msg>
+<var>&amp;{body}</var>
+<arg>email=estanqueiro@ninjaplus.com</arg>
+<arg>password=pwd123</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.561228" elapsed="0.000240"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.663112" level="INFO">POST Request : url=http://ninjaplus-api:3000/auth 
+ path_url=/auth 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '49', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=email=estanqueiro%40ninjaplus.com&amp;password=pwd123 
+ </msg>
+<msg time="2025-02-16T18:59:03.663204" level="INFO">POST Response : url=http://ninjaplus-api:3000/auth 
+ status=200, reason=OK 
+ headers={'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'SAMEORIGIN', 'X-Download-Options': 'noopen', 'X-XSS-Protection': '1; mode=block', 'Access-Control-Allow-Origin': '*', 'Access-Control-Expose-Headers': 'Authorization', 'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy42NjErMDA6MDAifQ.YQyrDlxLSvajJR9QaaB2YyOhvlhjnUyCV8P9ddEIxLQ', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '230', 'ETag': 'W/"e6-ilSjB7beXoblb++K9+6Sub3BUEs"', 'Vary': 'Accept-Encoding', 'Date': 'Sun, 16 Feb 2025 18:59:03 GMT', 'Connection': 'keep-alive'} 
+ body={
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy42NjErMDA6MDAifQ.YQyrDlxLSvajJR9QaaB2YyOhvlhjnUyCV8P9ddEIxLQ",
+    "expire": "2025-02-16T19:04:03.661+00:00",
+    "userId": 1
+} 
+ </msg>
+<msg time="2025-02-16T18:59:03.663332" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSION}</arg>
+<arg>${ROUTE_AUTH}</arg>
+<arg>data=${body}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.561569" elapsed="0.101789"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.664032" level="INFO">${token} = JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy42NjErMDA6MDAifQ.YQyrDlxLSvajJR9QaaB2YyOhvlhjnUyCV8P9ddEIxLQ</msg>
+<var>${token}</var>
+<arg>JWT ${response.json()['token']}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.663494" elapsed="0.000565"/>
+</kw>
+<return>
+<value>${token}</value>
+<status status="PASS" start="2025-02-16T18:59:03.664107" elapsed="0.000035"/>
+</return>
+<msg time="2025-02-16T18:59:03.664261" level="INFO">${token} = JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy42NjErMDA6MDAifQ.YQyrDlxLSvajJR9QaaB2YyOhvlhjnUyCV8P9ddEIxLQ</msg>
+<var>${token}</var>
+<status status="PASS" start="2025-02-16T18:59:03.560488" elapsed="0.103802"/>
+</kw>
+<kw name="Get User" owner="base_api">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.665386" level="INFO">Creating Session using : alias=nplus, url=http://ninjaplus-api:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:59:03.665238" elapsed="0.000297"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.665870" level="INFO">&amp;{headers} = { Content-Type=application/json | Authorization=JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy42NjErMDA6MDAifQ.YQyrDlxLSvajJR9QaaB2YyOhvlhjnUyCV8P9ddEIxLQ ...</msg>
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.665656" elapsed="0.000296"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.711201" level="INFO">GET Request : url=http://ninjaplus-api:3000/user/1 
+ path_url=/user/1 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy42NjErMDA6MDAifQ.YQyrDlxLSvajJR9QaaB2YyOhvlhjnUyCV8P9ddEIxLQ'} 
+ body=None 
+ </msg>
+<msg time="2025-02-16T18:59:03.711303" level="INFO">GET Response : url=http://ninjaplus-api:3000/user/1 
+ status=200, reason=OK 
+ headers={'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'SAMEORIGIN', 'X-Download-Options': 'noopen', 'X-XSS-Protection': '1; mode=block', 'Access-Control-Allow-Origin': '*', 'Access-Control-Expose-Headers': 'Authorization', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '265', 'ETag': 'W/"109-6T9hSquAQZgew+L6TtY4QEmilus"', 'Vary': 'Accept-Encoding', 'Date': 'Sun, 16 Feb 2025 18:59:03 GMT', 'Connection': 'keep-alive'} 
+ body={
+    "id": 1,
+    "full_name": "Paulo Estanqueiro",
+    "password": "$2b$10$JpdV9d0fMjzzLL5DXVl5Y.yVUhsJZY3UbmR6in8MMCx1DN5JhUTQ6",
+    "email": "estanqueiro@ninjaplus.com",
+    "createdAt": "2025-02-11T20:54:34.444Z",
+    "updatedAt": "2025-02-11T20:54:34.444Z"
+} 
+ </msg>
+<msg time="2025-02-16T18:59:03.711418" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSION}</arg>
+<arg>${ROUTE_USER}/${user_id}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.666074" elapsed="0.045374"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-02-16T18:59:03.711528" elapsed="0.000039"/>
+</return>
+<msg time="2025-02-16T18:59:03.711703" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${user_id}</arg>
+<arg>${token}</arg>
+<status status="PASS" start="2025-02-16T18:59:03.664778" elapsed="0.046951"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.712809" level="INFO">${code} = 200</msg>
+<var>${code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.712181" elapsed="0.000663"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${code}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.713138" elapsed="0.000153"/>
+</kw>
+<kw name="Dictionary Should Contain Value" owner="Collections">
+<arg>${response.json()}</arg>
+<arg>Paulo Estanqueiro</arg>
+<doc>Fails if ``value`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.713641" elapsed="0.000395"/>
+</kw>
+<kw name="Dictionary Should Contain Value" owner="Collections">
+<arg>${response.json()}</arg>
+<arg>estanqueiro@ninjaplus.com</arg>
+<doc>Fails if ``value`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.714327" elapsed="0.000389"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:03.559041" elapsed="0.155943"/>
+</test>
+<test id="s1-s1-s2-t2" name="User not found" line="18">
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.716782" level="INFO">${user_id} = 9999</msg>
+<var>${user_id}</var>
+<arg>9999</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.716639" elapsed="0.000168"/>
+</kw>
+<kw name="Get Admin Token" owner="base_api">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.717570" level="INFO">Creating Session using : alias=nplus, url=http://ninjaplus-api:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:59:03.717425" elapsed="0.000278"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.717983" level="INFO">&amp;{body} = { email=estanqueiro@ninjaplus.com | password=pwd123 }</msg>
+<var>&amp;{body}</var>
+<arg>email=estanqueiro@ninjaplus.com</arg>
+<arg>password=pwd123</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.717799" elapsed="0.000208"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.823295" level="INFO">POST Request : url=http://ninjaplus-api:3000/auth 
+ path_url=/auth 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '49', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=email=estanqueiro%40ninjaplus.com&amp;password=pwd123 
+ </msg>
+<msg time="2025-02-16T18:59:03.823404" level="INFO">POST Response : url=http://ninjaplus-api:3000/auth 
+ status=200, reason=OK 
+ headers={'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'SAMEORIGIN', 'X-Download-Options': 'noopen', 'X-XSS-Protection': '1; mode=block', 'Access-Control-Allow-Origin': '*', 'Access-Control-Expose-Headers': 'Authorization', 'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy44MjErMDA6MDAifQ.n0Q1mNk7RuRae0Q0s9jmhomrWEu0fCFL6TN-ZMfBWhI', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '230', 'ETag': 'W/"e6-DbLBQTohLtuutiClfGosuExrfL0"', 'Vary': 'Accept-Encoding', 'Date': 'Sun, 16 Feb 2025 18:59:03 GMT', 'Connection': 'keep-alive'} 
+ body={
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy44MjErMDA6MDAifQ.n0Q1mNk7RuRae0Q0s9jmhomrWEu0fCFL6TN-ZMfBWhI",
+    "expire": "2025-02-16T19:04:03.821+00:00",
+    "userId": 1
+} 
+ </msg>
+<msg time="2025-02-16T18:59:03.823525" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSION}</arg>
+<arg>${ROUTE_AUTH}</arg>
+<arg>data=${body}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.718098" elapsed="0.105452"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.824516" level="INFO">${token} = JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy44MjErMDA6MDAifQ.n0Q1mNk7RuRae0Q0s9jmhomrWEu0fCFL6TN-ZMfBWhI</msg>
+<var>${token}</var>
+<arg>JWT ${response.json()['token']}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.823699" elapsed="0.000849"/>
+</kw>
+<return>
+<value>${token}</value>
+<status status="PASS" start="2025-02-16T18:59:03.824601" elapsed="0.000037"/>
+</return>
+<msg time="2025-02-16T18:59:03.824776" level="INFO">${token} = JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy44MjErMDA6MDAifQ.n0Q1mNk7RuRae0Q0s9jmhomrWEu0fCFL6TN-ZMfBWhI</msg>
+<var>${token}</var>
+<status status="PASS" start="2025-02-16T18:59:03.717219" elapsed="0.107594"/>
+</kw>
+<kw name="Get User" owner="base_api">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.825969" level="INFO">Creating Session using : alias=nplus, url=http://ninjaplus-api:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:59:03.825806" elapsed="0.000362"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.827351" level="INFO">&amp;{headers} = { Content-Type=application/json | Authorization=JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy44MjErMDA6MDAifQ.n0Q1mNk7RuRae0Q0s9jmhomrWEu0fCFL6TN-ZMfBWhI ...</msg>
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.826495" elapsed="0.000892"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.854870" level="INFO">GET Request : url=http://ninjaplus-api:3000/user/9999 
+ path_url=/user/9999 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwaXJlIjoiMjAyNS0wMi0xNlQxOTowNDowMy44MjErMDA6MDAifQ.n0Q1mNk7RuRae0Q0s9jmhomrWEu0fCFL6TN-ZMfBWhI'} 
+ body=None 
+ </msg>
+<msg time="2025-02-16T18:59:03.855018" level="INFO">GET Response : url=http://ninjaplus-api:3000/user/9999 
+ status=404, reason=Not Found 
+ headers={'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'SAMEORIGIN', 'X-Download-Options': 'noopen', 'X-XSS-Protection': '1; mode=block', 'Access-Control-Allow-Origin': '*', 'Access-Control-Expose-Headers': 'Authorization', 'Content-Type': 'text/plain; charset=utf-8', 'Content-Length': '9', 'ETag': 'W/"9-0gXL1ngzMqISxa6S1zx3F4wtLyg"', 'Vary': 'Accept-Encoding', 'Date': 'Sun, 16 Feb 2025 18:59:03 GMT', 'Connection': 'keep-alive'} 
+ body=Not Found 
+ </msg>
+<msg time="2025-02-16T18:59:03.855213" level="INFO">${response} = &lt;Response [404]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSION}</arg>
+<arg>${ROUTE_USER}/${user_id}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.827548" elapsed="0.027709"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-02-16T18:59:03.855375" elapsed="0.000066"/>
+</return>
+<msg time="2025-02-16T18:59:03.855679" level="INFO">${response} = &lt;Response [404]&gt;</msg>
+<var>${response}</var>
+<arg>${user_id}</arg>
+<arg>${token}</arg>
+<status status="PASS" start="2025-02-16T18:59:03.825313" elapsed="0.030412"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.857209" level="INFO">${code} = 404</msg>
+<var>${code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.856141" elapsed="0.001148"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${code}</arg>
+<arg>404</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.857711" elapsed="0.000414"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:03.716147" elapsed="0.142365"/>
+</test>
+<status status="PASS" start="2025-02-16T18:59:03.553911" elapsed="0.305823"/>
+</suite>
+<suite id="s1-s1-s3" name="Post User" source="C:\QAx\projects\ninjaplus\specs\api\post_user.robot">
+<test id="s1-s1-s3-t1" name="Create a new user" line="9">
+<kw name="Remove User By Email" owner="db">
+<arg>bruce@wayne.com</arg>
+<status status="PASS" start="2025-02-16T18:59:03.867897" elapsed="0.043176"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.912262" level="INFO">&amp;{body} = { full_name=Bruce Wayne | email=bruce@wayne.com | password=pwd123 }</msg>
+<var>&amp;{body}</var>
+<arg>full_name=Bruce Wayne</arg>
+<arg>email=bruce@wayne.com</arg>
+<arg>password=pwd123</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.911756" elapsed="0.000567"/>
+</kw>
+<kw name="Post User" owner="base_api">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.913428" level="INFO">Creating Session using : alias=nplus, url=http://ninjaplus-api:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:59:03.913225" elapsed="0.000523"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.914383" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.913953" elapsed="0.000472"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.988775" level="INFO">POST Request : url=http://ninjaplus-api:3000/user 
+ path_url=/user 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '61', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=full_name=Bruce+Wayne&amp;email=bruce%40wayne.com&amp;password=pwd123 
+ </msg>
+<msg time="2025-02-16T18:59:03.988864" level="INFO">POST Response : url=http://ninjaplus-api:3000/user 
+ status=200, reason=OK 
+ headers={'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'SAMEORIGIN', 'X-Download-Options': 'noopen', 'X-XSS-Protection': '1; mode=block', 'Access-Control-Allow-Origin': '*', 'Access-Control-Expose-Headers': 'Authorization', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '250', 'ETag': 'W/"fa-iKKvVyWT/a2E7LByQTyKSf+sHJ0"', 'Vary': 'Accept-Encoding', 'Date': 'Sun, 16 Feb 2025 18:59:03 GMT', 'Connection': 'keep-alive'} 
+ body={
+    "id": 60,
+    "full_name": "Bruce Wayne",
+    "email": "bruce@wayne.com",
+    "password": "$2b$10$RnOZhnY.uY.m2TyvNV1y8.lDDex9RAwgouBqU0MecKFqXwI4ONsNW",
+    "updatedAt": "2025-02-16T18:59:03.920Z",
+    "createdAt": "2025-02-16T18:59:03.920Z"
+} 
+ </msg>
+<msg time="2025-02-16T18:59:03.988993" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSION}</arg>
+<arg>${ROUTE_USER}</arg>
+<arg>data=${body}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.914645" elapsed="0.074372"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-02-16T18:59:03.989082" elapsed="0.000043"/>
+</return>
+<msg time="2025-02-16T18:59:03.989251" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${body}</arg>
+<status status="PASS" start="2025-02-16T18:59:03.912833" elapsed="0.076440"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.990228" level="INFO">${code} = 200</msg>
+<var>${code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.989612" elapsed="0.000642"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${code}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.990578" elapsed="0.000168"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:03.867088" elapsed="0.123930"/>
+</test>
+<test id="s1-s1-s3-t2" name="Name required" line="19">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.992781" level="INFO">Creating Session using : alias=nplus, url=http://ninjaplus-api:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:59:03.992607" elapsed="0.000323"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.993797" level="INFO">&amp;{body} = { full_name= | email=bruce@wayne.com | password=pwd123 }</msg>
+<var>&amp;{body}</var>
+<arg>full_name=${EMPTY}</arg>
+<arg>email=bruce@wayne.com</arg>
+<arg>password=pwd123</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.993313" elapsed="0.000512"/>
+</kw>
+<kw name="Post User" owner="base_api">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:03.994486" level="INFO">Creating Session using : alias=nplus, url=http://ninjaplus-api:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:59:03.994357" elapsed="0.000259"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:03.994871" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.994717" elapsed="0.000180"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:04.007141" level="INFO">POST Request : url=http://ninjaplus-api:3000/user 
+ path_url=/user 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '50', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=full_name=&amp;email=bruce%40wayne.com&amp;password=pwd123 
+ </msg>
+<msg time="2025-02-16T18:59:04.007304" level="INFO">POST Response : url=http://ninjaplus-api:3000/user 
+ status=412, reason=Precondition Failed 
+ headers={'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'SAMEORIGIN', 'X-Download-Options': 'noopen', 'X-XSS-Protection': '1; mode=block', 'Access-Control-Allow-Origin': '*', 'Access-Control-Expose-Headers': 'Authorization', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '56', 'ETag': 'W/"38-nBSFKMQfdtTUYnk78HK844z3Mj8"', 'Vary': 'Accept-Encoding', 'Date': 'Sun, 16 Feb 2025 18:59:03 GMT', 'Connection': 'keep-alive'} 
+ body={
+    "msg": "Validation notEmpty on full_name failed"
+} 
+ </msg>
+<msg time="2025-02-16T18:59:04.007562" level="INFO">${response} = &lt;Response [412]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSION}</arg>
+<arg>${ROUTE_USER}</arg>
+<arg>data=${body}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-16T18:59:03.995001" elapsed="0.012597"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-02-16T18:59:04.007680" elapsed="0.000109"/>
+</return>
+<msg time="2025-02-16T18:59:04.008332" level="INFO">${response} = &lt;Response [412]&gt;</msg>
+<var>${response}</var>
+<arg>${body}</arg>
+<status status="PASS" start="2025-02-16T18:59:03.994122" elapsed="0.014349"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-02-16T18:59:04.010129" level="INFO">${code} = 412</msg>
+<var>${code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.008980" elapsed="0.001243"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${code}</arg>
+<arg>412</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.010922" elapsed="0.000479"/>
+</kw>
+<kw name="Dictionary Should Contain Value" owner="Collections">
+<arg>${response.json()}</arg>
+<arg>Validation notEmpty on full_name failed</arg>
+<doc>Fails if ``value`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.011812" elapsed="0.000559"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:03.992129" elapsed="0.020545"/>
+</test>
+<test id="s1-s1-s3-t3" name="Email required" line="29">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:04.014413" level="INFO">Creating Session using : alias=nplus, url=http://ninjaplus-api:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:59:04.014233" elapsed="0.000317"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:04.015376" level="INFO">&amp;{body} = { full_name=Bruce Wayne | email= | password=pwd123 }</msg>
+<var>&amp;{body}</var>
+<arg>full_name=Bruce Wayne</arg>
+<arg>email=${EMPTY}</arg>
+<arg>password=pwd123</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.014887" elapsed="0.000517"/>
+</kw>
+<kw name="Post User" owner="base_api">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:04.016144" level="INFO">Creating Session using : alias=nplus, url=http://ninjaplus-api:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:59:04.016003" elapsed="0.000259"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:04.016530" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.016359" elapsed="0.000200"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:04.030931" level="INFO">POST Request : url=http://ninjaplus-api:3000/user 
+ path_url=/user 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '44', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=full_name=Bruce+Wayne&amp;email=&amp;password=pwd123 
+ </msg>
+<msg time="2025-02-16T18:59:04.031056" level="INFO">POST Response : url=http://ninjaplus-api:3000/user 
+ status=412, reason=Precondition Failed 
+ headers={'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'SAMEORIGIN', 'X-Download-Options': 'noopen', 'X-XSS-Protection': '1; mode=block', 'Access-Control-Allow-Origin': '*', 'Access-Control-Expose-Headers': 'Authorization', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '52', 'ETag': 'W/"34-HLn3BaVXNNpj6rmqTVZpVfwGahY"', 'Vary': 'Accept-Encoding', 'Date': 'Sun, 16 Feb 2025 18:59:04 GMT', 'Connection': 'keep-alive'} 
+ body={
+    "msg": "Validation notEmpty on email failed"
+} 
+ </msg>
+<msg time="2025-02-16T18:59:04.031219" level="INFO">${response} = &lt;Response [412]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSION}</arg>
+<arg>${ROUTE_USER}</arg>
+<arg>data=${body}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.016650" elapsed="0.014610"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-02-16T18:59:04.031420" elapsed="0.000099"/>
+</return>
+<msg time="2025-02-16T18:59:04.031837" level="INFO">${response} = &lt;Response [412]&gt;</msg>
+<var>${response}</var>
+<arg>${body}</arg>
+<status status="PASS" start="2025-02-16T18:59:04.015762" elapsed="0.016147"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-02-16T18:59:04.033583" level="INFO">${code} = 412</msg>
+<var>${code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.032478" elapsed="0.001256"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${code}</arg>
+<arg>412</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.034241" elapsed="0.000544"/>
+</kw>
+<kw name="Dictionary Should Contain Value" owner="Collections">
+<arg>${response.json()}</arg>
+<arg>Validation notEmpty on email failed</arg>
+<doc>Fails if ``value`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.035342" elapsed="0.000872"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:04.013822" elapsed="0.022781"/>
+</test>
+<test id="s1-s1-s3-t4" name="Password required" line="39">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:04.038525" level="INFO">Creating Session using : alias=nplus, url=http://ninjaplus-api:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:59:04.038342" elapsed="0.000476"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:04.039697" level="INFO">&amp;{body} = { full_name=Bruce Wayne | email=bruce@wayne.com | password= }</msg>
+<var>&amp;{body}</var>
+<arg>full_name=Bruce Wayne</arg>
+<arg>email=bruce@wayne.com</arg>
+<arg>password=${EMPTY}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.039158" elapsed="0.000585"/>
+</kw>
+<kw name="Post User" owner="base_api">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:04.040513" level="INFO">Creating Session using : alias=nplus, url=http://ninjaplus-api:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:59:04.040380" elapsed="0.000263"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:04.040900" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.040741" elapsed="0.000184"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:04.064233" level="INFO">POST Request : url=http://ninjaplus-api:3000/user 
+ path_url=/user 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '55', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=full_name=Bruce+Wayne&amp;email=bruce%40wayne.com&amp;password= 
+ </msg>
+<msg time="2025-02-16T18:59:04.064359" level="INFO">POST Response : url=http://ninjaplus-api:3000/user 
+ status=412, reason=Precondition Failed 
+ headers={'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'SAMEORIGIN', 'X-Download-Options': 'noopen', 'X-XSS-Protection': '1; mode=block', 'Access-Control-Allow-Origin': '*', 'Access-Control-Expose-Headers': 'Authorization', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '55', 'ETag': 'W/"37-bQNcadxPvyrLIRm++2HSsUO+Q9M"', 'Vary': 'Accept-Encoding', 'Date': 'Sun, 16 Feb 2025 18:59:04 GMT', 'Connection': 'keep-alive'} 
+ body={
+    "msg": "Validation notEmpty on password failed"
+} 
+ </msg>
+<msg time="2025-02-16T18:59:04.064488" level="INFO">${response} = &lt;Response [412]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSION}</arg>
+<arg>${ROUTE_USER}</arg>
+<arg>data=${body}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.041013" elapsed="0.023534"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-02-16T18:59:04.064692" elapsed="0.000075"/>
+</return>
+<msg time="2025-02-16T18:59:04.065039" level="INFO">${response} = &lt;Response [412]&gt;</msg>
+<var>${response}</var>
+<arg>${body}</arg>
+<status status="PASS" start="2025-02-16T18:59:04.040111" elapsed="0.025013"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-02-16T18:59:04.066680" level="INFO">${code} = 412</msg>
+<var>${code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.065575" elapsed="0.001182"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${code}</arg>
+<arg>412</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.067329" elapsed="0.000305"/>
+</kw>
+<kw name="Dictionary Should Contain Value" owner="Collections">
+<arg>${response.json()}</arg>
+<arg>Validation notEmpty on password failed</arg>
+<doc>Fails if ``value`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.068219" elapsed="0.000783"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:04.037647" elapsed="0.031676"/>
+</test>
+<status status="PASS" start="2025-02-16T18:59:03.861605" elapsed="0.208948"/>
+</suite>
+<suite id="s1-s1-s4" name="Put User" source="C:\QAx\projects\ninjaplus\specs\api\put_user.robot">
+<test id="s1-s1-s4-t1" name="Update a user" line="10">
+<kw name="Remove User By Email" owner="db">
+<arg>estanqueiro@yahoo.com</arg>
+<status status="PASS" start="2025-02-16T18:59:04.089419" elapsed="0.041373"/>
+</kw>
+<kw name="Remove User By Email" owner="db">
+<arg>estanqueiro@outlook.com</arg>
+<status status="PASS" start="2025-02-16T18:59:04.131283" elapsed="0.026711"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:04.158966" level="INFO">&amp;{user} = { full_name=Estanqueiro | email=estanqueiro@yahoo.com | password=pwd123 }</msg>
+<var>&amp;{user}</var>
+<arg>full_name=Estanqueiro</arg>
+<arg>email=estanqueiro@yahoo.com</arg>
+<arg>password=pwd123</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.158535" elapsed="0.000501"/>
+</kw>
+<kw name="Post User Return Id" owner="base_api">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:04.160031" level="INFO">Creating Session using : alias=nplus, url=http://ninjaplus-api:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:59:04.159831" elapsed="0.000411"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:04.160806" level="INFO">&amp;{headers} = { Content-Type=application/json }</msg>
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.160410" elapsed="0.000469"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:04.237482" level="INFO">POST Request : url=http://ninjaplus-api:3000/user 
+ path_url=/user 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '67', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=full_name=Estanqueiro&amp;email=estanqueiro%40yahoo.com&amp;password=pwd123 
+ </msg>
+<msg time="2025-02-16T18:59:04.237573" level="INFO">POST Response : url=http://ninjaplus-api:3000/user 
+ status=200, reason=OK 
+ headers={'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'SAMEORIGIN', 'X-Download-Options': 'noopen', 'X-XSS-Protection': '1; mode=block', 'Access-Control-Allow-Origin': '*', 'Access-Control-Expose-Headers': 'Authorization', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '256', 'ETag': 'W/"100-VEVaefXBPaS2oShSSL/G6XgeCeo"', 'Vary': 'Accept-Encoding', 'Date': 'Sun, 16 Feb 2025 18:59:04 GMT', 'Connection': 'keep-alive'} 
+ body={
+    "id": 61,
+    "full_name": "Estanqueiro",
+    "email": "estanqueiro@yahoo.com",
+    "password": "$2b$10$wCRsrZoBdnAwe2MI5jYA3.TQGPPnTXTZ5wqOwiQ9d3SwerN.7UyFa",
+    "updatedAt": "2025-02-16T18:59:04.165Z",
+    "createdAt": "2025-02-16T18:59:04.165Z"
+} 
+ </msg>
+<msg time="2025-02-16T18:59:04.237768" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSION}</arg>
+<arg>${ROUTE_USER}</arg>
+<arg>data=${body}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.161156" elapsed="0.076638"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-02-16T18:59:04.238423" level="INFO">${user_id} = 61</msg>
+<var>${user_id}</var>
+<arg>${response.json()['id']}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.237959" elapsed="0.000490"/>
+</kw>
+<return>
+<value>${user_id}</value>
+<status status="PASS" start="2025-02-16T18:59:04.238520" elapsed="0.000049"/>
+</return>
+<msg time="2025-02-16T18:59:04.238685" level="INFO">${user_id} = 61</msg>
+<var>${user_id}</var>
+<arg>${user}</arg>
+<status status="PASS" start="2025-02-16T18:59:04.159457" elapsed="0.079262"/>
+</kw>
+<kw name="Get User Token" owner="base_api">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:04.239762" level="INFO">Creating Session using : alias=nplus, url=http://ninjaplus-api:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:59:04.239567" elapsed="0.000319"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:04.311629" level="INFO">POST Request : url=http://ninjaplus-api:3000/auth 
+ path_url=/auth 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '67', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=full_name=Estanqueiro&amp;email=estanqueiro%40yahoo.com&amp;password=pwd123 
+ </msg>
+<msg time="2025-02-16T18:59:04.311719" level="INFO">POST Response : url=http://ninjaplus-api:3000/auth 
+ status=200, reason=OK 
+ headers={'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'SAMEORIGIN', 'X-Download-Options': 'noopen', 'X-XSS-Protection': '1; mode=block', 'Access-Control-Allow-Origin': '*', 'Access-Control-Expose-Headers': 'Authorization', 'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NjEsImV4cGlyZSI6IjIwMjUtMDItMTZUMTk6MDQ6MDQuMzA5KzAwOjAwIn0.2XOxYaN44G6haY1w-emWb80BKPTmuuZUp4812SZ0OD4', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '232', 'ETag': 'W/"e8-EixzZ3Hge8/dADJT+wmHYMYgDq0"', 'Vary': 'Accept-Encoding', 'Date': 'Sun, 16 Feb 2025 18:59:04 GMT', 'Connection': 'keep-alive'} 
+ body={
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NjEsImV4cGlyZSI6IjIwMjUtMDItMTZUMTk6MDQ6MDQuMzA5KzAwOjAwIn0.2XOxYaN44G6haY1w-emWb80BKPTmuuZUp4812SZ0OD4",
+    "expire": "2025-02-16T19:04:04.309+00:00",
+    "userId": 61
+} 
+ </msg>
+<msg time="2025-02-16T18:59:04.311827" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSION}</arg>
+<arg>${ROUTE_AUTH}</arg>
+<arg>data=${body}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.239980" elapsed="0.071871"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-02-16T18:59:04.312447" level="INFO">${token} = JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NjEsImV4cGlyZSI6IjIwMjUtMDItMTZUMTk6MDQ6MDQuMzA5KzAwOjAwIn0.2XOxYaN44G6haY1w-emWb80BKPTmuuZUp4812SZ0OD4</msg>
+<var>${token}</var>
+<arg>JWT ${response.json()['token']}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.311995" elapsed="0.000477"/>
+</kw>
+<return>
+<value>${token}</value>
+<status status="PASS" start="2025-02-16T18:59:04.312519" elapsed="0.000034"/>
+</return>
+<msg time="2025-02-16T18:59:04.312661" level="INFO">${token} = JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NjEsImV4cGlyZSI6IjIwMjUtMDItMTZUMTk6MDQ6MDQuMzA5KzAwOjAwIn0.2XOxYaN44G6haY1w-emWb80BKPTmuuZUp4812SZ0OD4</msg>
+<var>${token}</var>
+<arg>${user}</arg>
+<status status="PASS" start="2025-02-16T18:59:04.239194" elapsed="0.073489"/>
+</kw>
+<kw name="Put User" owner="base_api">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:04.313693" level="INFO">Creating Session using : alias=nplus, url=http://ninjaplus-api:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:59:04.313569" elapsed="0.000248"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:04.314087" level="INFO">${body} = {'full_name': 'Paulo Estanqueiro', 'email': 'estanqueiro@outlook.com', 'password': 'pwd123'}</msg>
+<var>${body}</var>
+<arg>full_name=Paulo Estanqueiro</arg>
+<arg>email=estanqueiro@outlook.com</arg>
+<arg>password=pwd123</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.313920" elapsed="0.000191"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:04.314409" level="INFO">&amp;{headers} = { Content-Type=application/json | Authorization=JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NjEsImV4cGlyZSI6IjIwMjUtMDItMTZUMTk6MDQ6MDQuMzA5KzAwOjAwIn0.2XOxYaN44G6haY1w-emWb80BKPTmuuZUp4812SZ0OD4...</msg>
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.314224" elapsed="0.000210"/>
+</kw>
+<kw name="PUT On Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:04.393917" level="INFO">PUT Request : url=http://ninjaplus-api:3000/user/61 
+ path_url=/user/61 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NjEsImV4cGlyZSI6IjIwMjUtMDItMTZUMTk6MDQ6MDQuMzA5KzAwOjAwIn0.2XOxYaN44G6haY1w-emWb80BKPTmuuZUp4812SZ0OD4', 'Content-Length': '92'} 
+ body=b'{"full_name": "Paulo Estanqueiro", "email": "estanqueiro@outlook.com", "password": "pwd123"}' 
+ </msg>
+<msg time="2025-02-16T18:59:04.394066" level="INFO">PUT Response : url=http://ninjaplus-api:3000/user/61 
+ status=200, reason=OK 
+ headers={'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'SAMEORIGIN', 'X-Download-Options': 'noopen', 'X-XSS-Protection': '1; mode=block', 'Access-Control-Allow-Origin': '*', 'Access-Control-Expose-Headers': 'Authorization', 'Content-Type': 'text/plain; charset=utf-8', 'Content-Length': '2', 'ETag': 'W/"2-nOO9QiTIwXgNtWtBJezz8kv3SLc"', 'Vary': 'Accept-Encoding', 'Date': 'Sun, 16 Feb 2025 18:59:04 GMT', 'Connection': 'keep-alive'} 
+ body=OK 
+ </msg>
+<msg time="2025-02-16T18:59:04.394172" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSION}</arg>
+<arg>${ROUTE_USER}/${user_id}</arg>
+<arg>json=${body}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.314546" elapsed="0.079650"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-02-16T18:59:04.394282" elapsed="0.000039"/>
+</return>
+<msg time="2025-02-16T18:59:04.394449" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${user_id}</arg>
+<arg>${token}</arg>
+<status status="PASS" start="2025-02-16T18:59:04.313169" elapsed="0.081302"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-02-16T18:59:04.395465" level="INFO">${code} = 200</msg>
+<var>${code}</var>
+<arg>${response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.394885" elapsed="0.000659"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${code}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.395807" elapsed="0.000195"/>
+</kw>
+<kw name="Get User" owner="base_api">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:04.396761" level="INFO">Creating Session using : alias=nplus, url=http://ninjaplus-api:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${ENDPOINT}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:59:04.396642" elapsed="0.000287"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:59:04.397343" level="INFO">&amp;{headers} = { Content-Type=application/json | Authorization=JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NjEsImV4cGlyZSI6IjIwMjUtMDItMTZUMTk6MDQ6MDQuMzA5KzAwOjAwIn0.2XOxYaN44G6haY1w-emWb80BKPTmuuZUp4812SZ0OD4...</msg>
+<var>&amp;{headers}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.397080" elapsed="0.000289"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:59:04.413617" level="INFO">GET Request : url=http://ninjaplus-api:3000/user/61 
+ path_url=/user/61 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NjEsImV4cGlyZSI6IjIwMjUtMDItMTZUMTk6MDQ6MDQuMzA5KzAwOjAwIn0.2XOxYaN44G6haY1w-emWb80BKPTmuuZUp4812SZ0OD4'} 
+ body=None 
+ </msg>
+<msg time="2025-02-16T18:59:04.413708" level="INFO">GET Response : url=http://ninjaplus-api:3000/user/61 
+ status=200, reason=OK 
+ headers={'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'SAMEORIGIN', 'X-Download-Options': 'noopen', 'X-XSS-Protection': '1; mode=block', 'Access-Control-Allow-Origin': '*', 'Access-Control-Expose-Headers': 'Authorization', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '264', 'ETag': 'W/"108-JNd7kpxn4tbeX5doFa1QBOBCWVk"', 'Vary': 'Accept-Encoding', 'Date': 'Sun, 16 Feb 2025 18:59:04 GMT', 'Connection': 'keep-alive'} 
+ body={
+    "id": 61,
+    "full_name": "Paulo Estanqueiro",
+    "password": "$2b$10$at5Id1uo/PNgGcpcg/k0POi.2AlqxSRNis7gF7.hoNN1EdsnRqNTe",
+    "email": "estanqueiro@outlook.com",
+    "createdAt": "2025-02-16T18:59:04.165Z",
+    "updatedAt": "2025-02-16T18:59:04.323Z"
+} 
+ </msg>
+<msg time="2025-02-16T18:59:04.413823" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${SESSION}</arg>
+<arg>${ROUTE_USER}/${user_id}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=anything</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.397462" elapsed="0.016387"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-02-16T18:59:04.413980" elapsed="0.000061"/>
+</return>
+<msg time="2025-02-16T18:59:04.414351" level="INFO">${user} = &lt;Response [200]&gt;</msg>
+<var>${user}</var>
+<arg>${user_id}</arg>
+<arg>${token}</arg>
+<status status="PASS" start="2025-02-16T18:59:04.396294" elapsed="0.018129"/>
+</kw>
+<kw name="Dictionary Should Contain Value" owner="Collections">
+<arg>${user.json()}</arg>
+<arg>Paulo Estanqueiro</arg>
+<doc>Fails if ``value`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.415155" elapsed="0.001010"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${user.json()['email']}</arg>
+<arg>estanqueiro@outlook.com</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-02-16T18:59:04.416744" elapsed="0.001055"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:04.088541" elapsed="0.329641"/>
+</test>
+<status status="PASS" start="2025-02-16T18:59:04.072047" elapsed="0.347484"/>
+</suite>
+<status status="PASS" start="2025-02-16T18:59:02.501627" elapsed="1.919286"/>
+</suite>
+<suite id="s1-s2" name="Web" source="C:\QAx\projects\ninjaplus\specs\web">
+<suite id="s1-s2-s1" name="Cadastro" source="C:\QAx\projects\ninjaplus\specs\web\cadastro.robot">
+<test id="s1-s2-s1-t1" name="Cadastro de um novo filme com sucesso" line="11">
+<kw name="Abrir navegador" owner="base" type="SETUP">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-02-12T00:28:02.594307" level="INFO">Opening browser 'chrome' to base url 'http://ninjaplus-web:5000/login'.</msg>
-<arg>http://ninjaplus-web:5000/login</arg>
-<arg>chrome</arg>
+<msg time="2025-02-16T18:59:04.762357" level="INFO">Opening browser 'chrome' to base url 'http://ninjaplus-web:5000/login'.</msg>
+<arg>${DEFAULT_URL}</arg>
+<arg>${BROWSER}</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-02-12T00:28:02.593805" elapsed="2.569727"/>
+<status status="PASS" start="2025-02-16T18:59:04.762117" elapsed="2.387885"/>
 </kw>
 <kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
 <arg>10</arg>
 <doc>Sets the implicit wait value used by Selenium.</doc>
-<status status="PASS" start="2025-02-12T00:28:05.163818" elapsed="0.001462"/>
+<status status="PASS" start="2025-02-16T18:59:07.150356" elapsed="0.001718"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2025-02-12T00:28:05.165545" elapsed="0.038378"/>
+<status status="PASS" start="2025-02-16T18:59:07.152389" elapsed="0.041929"/>
 </kw>
-<status status="PASS" start="2025-02-12T00:28:02.593064" elapsed="2.611022"/>
+<status status="PASS" start="2025-02-16T18:59:04.761597" elapsed="2.432905"/>
 </kw>
-<kw name="Fazendo login com &quot;estanqueiro@ninjaplus.com&quot; e senha &quot;pwd123&quot;" owner="login_steps" source_name="Fazendo login com &quot;${email}&quot; e senha &quot;${pass}&quot;">
+<kw name="Dado que estou logado com credenciais validas" owner="cadastro">
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-02-12T00:28:05.205980" level="INFO">Typing text 'estanqueiro@ninjaplus.com' into text field 'id:emailId'.</msg>
-<arg>id:emailId</arg>
-<arg>${email}</arg>
+<msg time="2025-02-16T18:59:07.196687" level="INFO">Typing text 'estanqueiro@ninjaplus.com' into text field 'id:emailId'.</msg>
+<arg>${INPUT_EMAIL}</arg>
+<arg>estanqueiro@ninjaplus.com</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-02-12T00:28:05.205427" elapsed="0.249029"/>
+<status status="PASS" start="2025-02-16T18:59:07.195930" elapsed="0.249405"/>
 </kw>
 <kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-02-12T00:28:05.456279" level="INFO">Typing password into text field 'id:passId'.</msg>
-<msg time="2025-02-12T00:28:05.507553" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id:passId</arg>
-<arg>${pass}</arg>
+<msg time="2025-02-16T18:59:07.446364" level="INFO">Typing password into text field 'css:input[name=password]'.</msg>
+<msg time="2025-02-16T18:59:07.545664" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>${INPUT_PASS}</arg>
+<arg>pwd123</arg>
 <doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-02-12T00:28:05.455461" elapsed="0.151471"/>
+<status status="PASS" start="2025-02-16T18:59:07.445743" elapsed="0.222048"/>
 </kw>
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-02-12T00:28:05.607405" level="INFO">Clicking button 'id:login'.</msg>
-<arg>id:login</arg>
+<msg time="2025-02-16T18:59:07.668209" level="INFO">Clicking button 'id:login'.</msg>
+<arg>${BUTTON_SUBMIT}</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-02-12T00:28:05.607171" elapsed="0.104499"/>
+<status status="PASS" start="2025-02-16T18:59:07.667982" elapsed="0.095080"/>
 </kw>
-<status status="PASS" start="2025-02-12T00:28:05.204736" elapsed="0.507175"/>
+<status status="PASS" start="2025-02-16T18:59:07.195113" elapsed="0.568253"/>
 </kw>
-<kw name="Devo ver o meu nome &quot;Paulo Estanqueiro&quot; na área logada" owner="login_steps" source_name="Devo ver o meu nome &quot;${username}&quot; na área logada">
+<kw name="Quando eu faço o cadastro de um novo filme" owner="cadastro">
+<kw name="Remove Movie By Title" owner="db">
+<arg>${title}</arg>
+<status status="PASS" start="2025-02-16T18:59:07.764563" elapsed="0.025160"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:07.790859" level="INFO">Clicking button 'css:.movie-add'.</msg>
+<arg>${BUTTON_ADD}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:07.789919" elapsed="0.417197"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:08.207806" level="INFO">Typing text 'Resident Evil' into text field 'css:input[name=title]'.</msg>
+<arg>${INPUT_TITLE}</arg>
+<arg>${Title}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:08.207406" elapsed="0.450073"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:08.658111" level="INFO">Clicking element 'css:input[placeholder=Status]'.</msg>
+<arg>${DROP_STATUS}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:08.657733" elapsed="0.109613"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${OPTION_AVAILABLE}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-02-16T18:59:08.767623" elapsed="0.271899"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:09.040176" level="INFO">Clicking element 'xpath://li//span[contains(text(),"Disponível")]'.</msg>
+<arg>${OPTION_AVAILABLE}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:09.039818" elapsed="0.101757"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:09.142471" level="INFO">Typing text '2002' into text field 'css:input[name=year]'.</msg>
+<arg>${INPUT_YEAR}</arg>
+<arg>${Year}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:09.141870" elapsed="0.146144"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:09.288520" level="INFO">Typing text '01/12/2002' into text field 'css:input[name=release_date]'.</msg>
+<arg>${INPUT_RDATE}</arg>
+<arg>${ReleaseDate}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:09.288239" elapsed="0.200126"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:09.489100" level="INFO">Typing text 'Milla Jovovich' into text field 'css:.cast'.</msg>
+<arg>${INPUT_CAST}</arg>
+<arg>${actor}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:09.488868" elapsed="0.199055"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:09.688711" level="INFO">Sending key(s) ('TAB',) to css:.cast element.</msg>
+<msg time="2025-02-16T18:59:10.049221" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2025-02-16T18:59:10.049371" level="INFO">Releasing special key TAB.</msg>
+<arg>${INPUT_CAST}</arg>
+<arg>TAB</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2025-02-16T18:59:09.688256" elapsed="0.414757"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-02-16T18:59:10.103679" level="INFO">Milla Jovovich</msg>
+<arg>${actor}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-02-16T18:59:10.103383" elapsed="0.000410"/>
+</kw>
+<var name="${actor}">Milla Jovovich</var>
+<status status="PASS" start="2025-02-16T18:59:09.488728" elapsed="0.615162"/>
+</iter>
+<iter>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:10.104675" level="INFO">Typing text 'Ali Larter' into text field 'css:.cast'.</msg>
+<arg>${INPUT_CAST}</arg>
+<arg>${actor}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:10.104325" elapsed="0.182162"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:10.287522" level="INFO">Sending key(s) ('TAB',) to css:.cast element.</msg>
+<msg time="2025-02-16T18:59:10.607378" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2025-02-16T18:59:10.607709" level="INFO">Releasing special key TAB.</msg>
+<arg>${INPUT_CAST}</arg>
+<arg>TAB</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2025-02-16T18:59:10.286825" elapsed="0.385466"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-02-16T18:59:10.672671" level="INFO">Ali Larter</msg>
+<arg>${actor}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-02-16T18:59:10.672490" elapsed="0.000236"/>
+</kw>
+<var name="${actor}">Ali Larter</var>
+<status status="PASS" start="2025-02-16T18:59:10.104138" elapsed="0.568638"/>
+</iter>
+<iter>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:10.673252" level="INFO">Typing text 'Ian Glen' into text field 'css:.cast'.</msg>
+<arg>${INPUT_CAST}</arg>
+<arg>${actor}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:10.673051" elapsed="0.153173"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:10.826976" level="INFO">Sending key(s) ('TAB',) to css:.cast element.</msg>
+<msg time="2025-02-16T18:59:11.128928" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2025-02-16T18:59:11.129001" level="INFO">Releasing special key TAB.</msg>
+<arg>${INPUT_CAST}</arg>
+<arg>TAB</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2025-02-16T18:59:10.826494" elapsed="0.337365"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-02-16T18:59:11.164451" level="INFO">Ian Glen</msg>
+<arg>${actor}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-02-16T18:59:11.164097" elapsed="0.000566"/>
+</kw>
+<var name="${actor}">Ian Glen</var>
+<status status="PASS" start="2025-02-16T18:59:10.672917" elapsed="0.491879"/>
+</iter>
+<iter>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:11.165781" level="INFO">Typing text 'Shawn Roberts' into text field 'css:.cast'.</msg>
+<arg>${INPUT_CAST}</arg>
+<arg>${actor}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:11.165375" elapsed="0.186553"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:11.352565" level="INFO">Sending key(s) ('TAB',) to css:.cast element.</msg>
+<msg time="2025-02-16T18:59:11.649830" level="INFO">Pressing special key TAB to element.</msg>
+<msg time="2025-02-16T18:59:11.649951" level="INFO">Releasing special key TAB.</msg>
+<arg>${INPUT_CAST}</arg>
+<arg>TAB</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2025-02-16T18:59:11.352163" elapsed="0.332509"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-02-16T18:59:11.685214" level="INFO">Shawn Roberts</msg>
+<arg>${actor}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-02-16T18:59:11.684953" elapsed="0.000332"/>
+</kw>
+<var name="${actor}">Shawn Roberts</var>
+<status status="PASS" start="2025-02-16T18:59:11.165098" elapsed="0.520261"/>
+</iter>
+<var>${actor}</var>
+<value>@{Cast}</value>
+<status status="PASS" start="2025-02-16T18:59:09.488499" elapsed="2.196922"/>
+</for>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:11.685910" level="INFO">Typing text 'Alice tem a missao de desativar a rainha vermelha na colmeia porque alguem jogou um virus e deu ruim' into text field 'css:textarea[name=overview]'.</msg>
+<arg>${TEXT_PLOT}</arg>
+<arg>${Plot}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:11.685608" elapsed="0.551962"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:12.238074" level="INFO">Clicking button 'id:create-movie'.</msg>
+<arg>${BUTTON_SAVE}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:12.237805" elapsed="0.120490"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:07.764008" elapsed="4.594575"/>
+</kw>
+<kw name="Entao esse filme deve ser exibido na lista" owner="cadastro">
 <kw name="Wait Until Element Contains" owner="SeleniumLibrary">
-<arg>css:.user .info span</arg>
+<arg>${TABLE_ITEM}</arg>
+<arg>${Title}</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2025-02-16T18:59:12.359829" elapsed="3.308096"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:12.359177" elapsed="3.308957"/>
+</kw>
+<kw name="Fechar navegador" owner="base" type="TEARDOWN">
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:15.857933" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-1.png"&gt;&lt;img src="selenium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2025-02-16T18:59:15.669042" elapsed="0.189075"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-02-16T18:59:15.858379" elapsed="2.315318"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:15.668675" elapsed="2.505909"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:04.761023" elapsed="13.414636"/>
+</test>
+<doc>Formulário de cadastro de filme</doc>
+<status status="PASS" start="2025-02-16T18:59:04.424078" elapsed="13.754641"/>
+</suite>
+<suite id="s1-s2-s2" name="Login Com Sucesso" source="C:\QAx\projects\ninjaplus\specs\web\login_com_sucesso.robot">
+<test id="s1-s2-s2-t1" name="Login com sucesso" line="10">
+<kw name="Abrir navegador" owner="base" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:18.192145" level="INFO">Opening browser 'chrome' to base url 'http://ninjaplus-web:5000/login'.</msg>
+<arg>${DEFAULT_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-02-16T18:59:18.191578" elapsed="2.238138"/>
+</kw>
+<kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
+<arg>10</arg>
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<status status="PASS" start="2025-02-16T18:59:20.430027" elapsed="0.001560"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-02-16T18:59:20.431839" elapsed="0.027378"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:18.190979" elapsed="2.268393"/>
+</kw>
+<kw name="Fazendo login com &quot;estanqueiro@ninjaplus.com&quot; e senha &quot;pwd123&quot;" owner="login" source_name="Fazendo login com &quot;${email}&quot; e senha &quot;${pass}&quot;">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:20.460909" level="INFO">Typing text 'estanqueiro@ninjaplus.com' into text field 'id:emailId'.</msg>
+<arg>${INPUT_EMAIL}</arg>
+<arg>${email}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:20.460520" elapsed="0.247448"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:20.708755" level="INFO">Typing password into text field 'css:input[name=password]'.</msg>
+<msg time="2025-02-16T18:59:20.753240" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>${INPUT_PASS}</arg>
+<arg>${pass}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:20.708312" elapsed="0.137751"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:20.846514" level="INFO">Clicking button 'id:login'.</msg>
+<arg>${BUTTON_SUBMIT}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:20.846298" elapsed="0.109210"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:20.459948" elapsed="0.495893"/>
+</kw>
+<kw name="Devo ver o meu nome &quot;Paulo Estanqueiro&quot; na área logada" owner="login" source_name="Devo ver o meu nome &quot;${username}&quot; na área logada">
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>${SPAN_USER}</arg>
 <arg>${username}</arg>
 <doc>Waits until the element ``locator`` contains ``text``.</doc>
-<status status="PASS" start="2025-02-12T00:28:05.712850" elapsed="0.667072"/>
+<status status="PASS" start="2025-02-16T18:59:20.956991" elapsed="0.642219"/>
 </kw>
-<status status="PASS" start="2025-02-12T00:28:05.712422" elapsed="0.667622"/>
+<status status="PASS" start="2025-02-16T18:59:20.956387" elapsed="0.642948"/>
 </kw>
-<kw name="Fechar navegador" owner="login_steps" type="TEARDOWN">
+<kw name="Fechar navegador" owner="base" type="TEARDOWN">
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:21.810551" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-2.png"&gt;&lt;img src="selenium-screenshot-2.png" width="800px"&gt;&lt;/a&gt;</msg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2025-02-16T18:59:21.600158" elapsed="0.210517"/>
+</kw>
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2025-02-12T00:28:06.381045" elapsed="2.206925"/>
+<status status="PASS" start="2025-02-16T18:59:21.810846" elapsed="2.170840"/>
 </kw>
-<status status="PASS" start="2025-02-12T00:28:06.380647" elapsed="2.207450"/>
+<status status="PASS" start="2025-02-16T18:59:21.599834" elapsed="2.382115"/>
 </kw>
-<status status="PASS" start="2025-02-12T00:28:02.592169" elapsed="5.996285"/>
+<status status="PASS" start="2025-02-16T18:59:18.190502" elapsed="5.791700"/>
 </test>
-<test id="s1-s1-t2" name="Email deve ser requerido" line="14">
-<kw name="Abrir navegador" owner="login_steps" type="SETUP">
-<kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-02-12T00:28:08.590471" level="INFO">Opening browser 'chrome' to base url 'http://ninjaplus-web:5000/login'.</msg>
-<arg>http://ninjaplus-web:5000/login</arg>
-<arg>chrome</arg>
-<doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-02-12T00:28:08.590320" elapsed="2.397924"/>
-</kw>
-<kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
-<arg>10</arg>
-<doc>Sets the implicit wait value used by Selenium.</doc>
-<status status="PASS" start="2025-02-12T00:28:10.988495" elapsed="0.001474"/>
-</kw>
-<kw name="Maximize Browser Window" owner="SeleniumLibrary">
-<doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2025-02-12T00:28:10.990244" elapsed="0.034601"/>
-</kw>
-<status status="PASS" start="2025-02-12T00:28:08.590050" elapsed="2.435004"/>
-</kw>
-<kw name="Fazendo login com &quot;&quot; e senha &quot;pwd123&quot;" owner="login_steps" source_name="Fazendo login com &quot;${email}&quot; e senha &quot;${pass}&quot;">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-02-12T00:28:11.027049" level="INFO">Typing text '' into text field 'id:emailId'.</msg>
-<arg>id:emailId</arg>
-<arg>${email}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-02-12T00:28:11.026315" elapsed="0.116483"/>
-</kw>
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-02-12T00:28:11.143245" level="INFO">Typing password into text field 'id:passId'.</msg>
-<msg time="2025-02-12T00:28:11.202597" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id:passId</arg>
-<arg>${pass}</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-02-12T00:28:11.142999" elapsed="0.191430"/>
-</kw>
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-02-12T00:28:11.335092" level="INFO">Clicking button 'id:login'.</msg>
-<arg>id:login</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-02-12T00:28:11.334761" elapsed="0.128443"/>
-</kw>
-<status status="PASS" start="2025-02-12T00:28:11.025587" elapsed="0.437759"/>
-</kw>
-<kw name="Devo ver a seguinte mensagem de alerta &quot;Opps. Cadê o email?&quot;" owner="login_steps" source_name="Devo ver a seguinte mensagem de alerta &quot;${expected_message}&quot;">
-<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
-<arg>css:.alert</arg>
-<arg>${expected_message}</arg>
-<doc>Waits until the element ``locator`` contains ``text``.</doc>
-<status status="PASS" start="2025-02-12T00:28:11.464207" elapsed="0.033404"/>
-</kw>
-<status status="PASS" start="2025-02-12T00:28:11.463850" elapsed="0.033941"/>
-</kw>
-<kw name="Fechar navegador" owner="login_steps" type="TEARDOWN">
-<kw name="Close Browser" owner="SeleniumLibrary">
-<doc>Closes the current browser.</doc>
-<status status="PASS" start="2025-02-12T00:28:11.498788" elapsed="2.271115"/>
-</kw>
-<status status="PASS" start="2025-02-12T00:28:11.498324" elapsed="2.271826"/>
-</kw>
-<status status="PASS" start="2025-02-12T00:28:08.589534" elapsed="5.180940"/>
-</test>
-<test id="s1-s1-t3" name="Senha deve ser requerido" line="18">
-<kw name="Abrir navegador" owner="login_steps" type="SETUP">
-<kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-02-12T00:28:13.772807" level="INFO">Opening browser 'chrome' to base url 'http://ninjaplus-web:5000/login'.</msg>
-<arg>http://ninjaplus-web:5000/login</arg>
-<arg>chrome</arg>
-<doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-02-12T00:28:13.772611" elapsed="2.334743"/>
-</kw>
-<kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
-<arg>10</arg>
-<doc>Sets the implicit wait value used by Selenium.</doc>
-<status status="PASS" start="2025-02-12T00:28:16.107689" elapsed="0.001472"/>
-</kw>
-<kw name="Maximize Browser Window" owner="SeleniumLibrary">
-<doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2025-02-12T00:28:16.109418" elapsed="0.034258"/>
-</kw>
-<status status="PASS" start="2025-02-12T00:28:13.772298" elapsed="2.371870"/>
-</kw>
-<kw name="Fazendo login com &quot;estanqueiro@ninjaplus.com&quot; e senha &quot;&quot;" owner="login_steps" source_name="Fazendo login com &quot;${email}&quot; e senha &quot;${pass}&quot;">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-02-12T00:28:16.146357" level="INFO">Typing text 'estanqueiro@ninjaplus.com' into text field 'id:emailId'.</msg>
-<arg>id:emailId</arg>
-<arg>${email}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-02-12T00:28:16.146027" elapsed="0.245733"/>
-</kw>
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-02-12T00:28:16.392421" level="INFO">Typing password into text field 'id:passId'.</msg>
-<msg time="2025-02-12T00:28:16.446611" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id:passId</arg>
-<arg>${pass}</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-02-12T00:28:16.392051" elapsed="0.117516"/>
-</kw>
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-02-12T00:28:16.509960" level="INFO">Clicking button 'id:login'.</msg>
-<arg>id:login</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-02-12T00:28:16.509764" elapsed="0.110094"/>
-</kw>
-<status status="PASS" start="2025-02-12T00:28:16.145190" elapsed="0.474832"/>
-</kw>
-<kw name="Devo ver a seguinte mensagem de alerta &quot;Opps. Cadê a senha?&quot;" owner="login_steps" source_name="Devo ver a seguinte mensagem de alerta &quot;${expected_message}&quot;">
-<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
-<arg>css:.alert</arg>
-<arg>${expected_message}</arg>
-<doc>Waits until the element ``locator`` contains ``text``.</doc>
-<status status="PASS" start="2025-02-12T00:28:16.621314" elapsed="0.032178"/>
-</kw>
-<status status="PASS" start="2025-02-12T00:28:16.620726" elapsed="0.032959"/>
-</kw>
-<kw name="Fechar navegador" owner="login_steps" type="TEARDOWN">
-<kw name="Close Browser" owner="SeleniumLibrary">
-<doc>Closes the current browser.</doc>
-<status status="PASS" start="2025-02-12T00:28:16.655400" elapsed="2.265004"/>
-</kw>
-<status status="PASS" start="2025-02-12T00:28:16.654511" elapsed="2.266351"/>
-</kw>
-<status status="PASS" start="2025-02-12T00:28:13.771745" elapsed="5.149974"/>
-</test>
-<doc>O usuário informa suas credenciais de acesso e submete o formulário de login</doc>
-<status status="PASS" start="2025-02-12T00:28:02.288263" elapsed="16.636878"/>
+<doc>O usuário informa suas credenciais e vai para a área logada</doc>
+<status status="PASS" start="2025-02-16T18:59:18.180988" elapsed="5.802344"/>
 </suite>
-<suite id="s1-s2" name="Login Sem Sucesso" source="C:\QAx\projects\ninjaplus\specs\login_sem_sucesso.robot">
-<test id="s1-s2-t1" name="Senha inválida" line="11">
-<kw name="Abrir navegador" owner="login_steps" type="SETUP">
+<suite id="s1-s2-s3" name="Login Sem Sucesso" source="C:\QAx\projects\ninjaplus\specs\web\login_sem_sucesso.robot">
+<test id="s1-s2-s3-t1" name="Senha inválida" line="11">
+<kw name="Abrir navegador" owner="base" type="SETUP">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-02-12T00:28:18.933268" level="INFO">Opening browser 'chrome' to base url 'http://ninjaplus-web:5000/login'.</msg>
-<arg>http://ninjaplus-web:5000/login</arg>
-<arg>chrome</arg>
+<msg time="2025-02-16T18:59:23.989400" level="INFO">Opening browser 'chrome' to base url 'http://ninjaplus-web:5000/login'.</msg>
+<arg>${DEFAULT_URL}</arg>
+<arg>${BROWSER}</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-02-12T00:28:18.933099" elapsed="2.337518"/>
+<status status="PASS" start="2025-02-16T18:59:23.989176" elapsed="2.221458"/>
 </kw>
 <kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
 <arg>10</arg>
 <doc>Sets the implicit wait value used by Selenium.</doc>
-<status status="PASS" start="2025-02-12T00:28:21.271258" elapsed="0.002439"/>
+<status status="PASS" start="2025-02-16T18:59:26.210948" elapsed="0.001523"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2025-02-12T00:28:21.273963" elapsed="0.032958"/>
+<status status="PASS" start="2025-02-16T18:59:26.212720" elapsed="0.031412"/>
 </kw>
-<status status="PASS" start="2025-02-12T00:28:18.932774" elapsed="2.374274"/>
+<status status="PASS" start="2025-02-16T18:59:23.988820" elapsed="2.255503"/>
 </kw>
-<kw name="Logando com credenciais inválidas devo ver uma mensagem de alerta" owner="login_steps">
+<kw name="Logando com credenciais inválidas devo ver uma mensagem de alerta" owner="login">
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-02-12T00:28:21.308096" level="INFO">Typing text 'estanqueiro@ninjaplus.com' into text field 'id:emailId'.</msg>
-<arg>id:emailId</arg>
+<msg time="2025-02-16T18:59:26.246079" level="INFO">Typing text 'estanqueiro@ninjaplus.com' into text field 'id:emailId'.</msg>
+<arg>${INPUT_EMAIL}</arg>
 <arg>${email}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-02-12T00:28:21.307897" elapsed="0.247724"/>
+<status status="PASS" start="2025-02-16T18:59:26.245667" elapsed="0.268708"/>
 </kw>
 <kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-02-12T00:28:21.557659" level="INFO">Typing password into text field 'id:passId'.</msg>
-<msg time="2025-02-12T00:28:21.634078" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id:passId</arg>
+<msg time="2025-02-16T18:59:26.514887" level="INFO">Typing password into text field 'css:input[name=password]'.</msg>
+<msg time="2025-02-16T18:59:26.564694" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>${INPUT_PASS}</arg>
 <arg>${pass}</arg>
 <doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-02-12T00:28:21.556685" elapsed="0.165141"/>
+<status status="PASS" start="2025-02-16T18:59:26.514610" elapsed="0.144045"/>
 </kw>
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-02-12T00:28:21.722314" level="INFO">Clicking button 'id:login'.</msg>
-<arg>id:login</arg>
+<msg time="2025-02-16T18:59:26.659406" level="INFO">Clicking button 'id:login'.</msg>
+<arg>${BUTTON_SUBMIT}</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-02-12T00:28:21.722037" elapsed="0.128616"/>
+<status status="PASS" start="2025-02-16T18:59:26.658971" elapsed="0.105313"/>
 </kw>
 <kw name="Wait Until Element Contains" owner="SeleniumLibrary">
-<arg>css:.alert</arg>
+<arg>${DIV_ALERT}</arg>
 <arg>${expected_message}</arg>
 <doc>Waits until the element ``locator`` contains ``text``.</doc>
-<status status="PASS" start="2025-02-12T00:28:21.851007" elapsed="0.268989"/>
+<status status="PASS" start="2025-02-16T18:59:26.764646" elapsed="0.282763"/>
 </kw>
 <arg>estanqueiro@ninjaplus.com</arg>
 <arg>asdfg</arg>
 <arg>Usuário e/ou senha inválidos</arg>
-<status status="PASS" start="2025-02-12T00:28:21.307484" elapsed="0.812772"/>
+<status status="PASS" start="2025-02-16T18:59:26.245066" elapsed="0.802558"/>
 </kw>
-<kw name="Fechar navegador" owner="login_steps" type="TEARDOWN">
+<kw name="Fechar navegador" owner="base" type="TEARDOWN">
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:27.900015" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-3.png"&gt;&lt;img src="selenium-screenshot-3.png" width="800px"&gt;&lt;/a&gt;</msg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2025-02-16T18:59:27.048729" elapsed="0.851438"/>
+</kw>
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2025-02-12T00:28:22.121465" elapsed="2.216768"/>
+<status status="PASS" start="2025-02-16T18:59:27.900328" elapsed="2.273539"/>
 </kw>
-<status status="PASS" start="2025-02-12T00:28:22.120962" elapsed="2.217432"/>
+<status status="PASS" start="2025-02-16T18:59:27.048235" elapsed="3.125965"/>
 </kw>
-<status status="PASS" start="2025-02-12T00:28:18.931994" elapsed="5.406736"/>
+<status status="PASS" start="2025-02-16T18:59:23.988149" elapsed="6.186376"/>
 </test>
-<test id="s1-s2-t2" name="Usuário não cadastra" line="12">
-<kw name="Abrir navegador" owner="login_steps" type="SETUP">
+<test id="s1-s2-s3-t2" name="Usuário não cadastra" line="12">
+<kw name="Abrir navegador" owner="base" type="SETUP">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-02-12T00:28:24.341022" level="INFO">Opening browser 'chrome' to base url 'http://ninjaplus-web:5000/login'.</msg>
-<arg>http://ninjaplus-web:5000/login</arg>
-<arg>chrome</arg>
+<msg time="2025-02-16T18:59:30.176360" level="INFO">Opening browser 'chrome' to base url 'http://ninjaplus-web:5000/login'.</msg>
+<arg>${DEFAULT_URL}</arg>
+<arg>${BROWSER}</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-02-12T00:28:24.340851" elapsed="2.317654"/>
+<status status="PASS" start="2025-02-16T18:59:30.176174" elapsed="2.253274"/>
 </kw>
 <kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
 <arg>10</arg>
 <doc>Sets the implicit wait value used by Selenium.</doc>
-<status status="PASS" start="2025-02-12T00:28:26.658803" elapsed="0.001546"/>
+<status status="PASS" start="2025-02-16T18:59:32.429737" elapsed="0.001529"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2025-02-12T00:28:26.660638" elapsed="0.029807"/>
+<status status="PASS" start="2025-02-16T18:59:32.431618" elapsed="0.038830"/>
 </kw>
-<status status="PASS" start="2025-02-12T00:28:24.340554" elapsed="2.350074"/>
+<status status="PASS" start="2025-02-16T18:59:30.175926" elapsed="2.294691"/>
 </kw>
-<kw name="Logando com credenciais inválidas devo ver uma mensagem de alerta" owner="login_steps">
+<kw name="Logando com credenciais inválidas devo ver uma mensagem de alerta" owner="login">
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-02-12T00:28:26.692098" level="INFO">Typing text 'padrekevedo@nokziste.com' into text field 'id:emailId'.</msg>
-<arg>id:emailId</arg>
+<msg time="2025-02-16T18:59:32.471689" level="INFO">Typing text 'padrekevedo@nokziste.com' into text field 'id:emailId'.</msg>
+<arg>${INPUT_EMAIL}</arg>
 <arg>${email}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-02-12T00:28:26.691710" elapsed="0.239546"/>
+<status status="PASS" start="2025-02-16T18:59:32.471469" elapsed="0.237632"/>
 </kw>
 <kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-02-12T00:28:26.931802" level="INFO">Typing password into text field 'id:passId'.</msg>
-<msg time="2025-02-12T00:28:26.982731" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id:passId</arg>
+<msg time="2025-02-16T18:59:32.709639" level="INFO">Typing password into text field 'css:input[name=password]'.</msg>
+<msg time="2025-02-16T18:59:32.781382" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>${INPUT_PASS}</arg>
 <arg>${pass}</arg>
 <doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-02-12T00:28:26.931483" elapsed="0.153332"/>
+<status status="PASS" start="2025-02-16T18:59:32.709340" elapsed="0.160068"/>
 </kw>
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-02-12T00:28:27.085501" level="INFO">Clicking button 'id:login'.</msg>
-<arg>id:login</arg>
+<msg time="2025-02-16T18:59:32.869999" level="INFO">Clicking button 'id:login'.</msg>
+<arg>${BUTTON_SUBMIT}</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-02-12T00:28:27.085145" elapsed="0.137731"/>
+<status status="PASS" start="2025-02-16T18:59:32.869687" elapsed="0.108798"/>
 </kw>
 <kw name="Wait Until Element Contains" owner="SeleniumLibrary">
-<arg>css:.alert</arg>
+<arg>${DIV_ALERT}</arg>
 <arg>${expected_message}</arg>
 <doc>Waits until the element ``locator`` contains ``text``.</doc>
-<status status="PASS" start="2025-02-12T00:28:27.223462" elapsed="0.256774"/>
+<status status="PASS" start="2025-02-16T18:59:32.978792" elapsed="0.252014"/>
 </kw>
 <arg>padrekevedo@nokziste.com</arg>
 <arg>pwd123</arg>
 <arg>Usuário e/ou senha inválidos</arg>
-<status status="PASS" start="2025-02-12T00:28:26.691138" elapsed="0.789347"/>
+<status status="PASS" start="2025-02-16T18:59:32.471106" elapsed="0.759886"/>
 </kw>
-<kw name="Fechar navegador" owner="login_steps" type="TEARDOWN">
+<kw name="Fechar navegador" owner="base" type="TEARDOWN">
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:34.083128" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-4.png"&gt;&lt;img src="selenium-screenshot-4.png" width="800px"&gt;&lt;/a&gt;</msg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2025-02-16T18:59:33.231872" elapsed="0.851400"/>
+</kw>
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2025-02-12T00:28:27.481175" elapsed="2.207910"/>
+<status status="PASS" start="2025-02-16T18:59:34.083451" elapsed="2.238808"/>
 </kw>
-<status status="PASS" start="2025-02-12T00:28:27.480888" elapsed="2.208596"/>
+<status status="PASS" start="2025-02-16T18:59:33.231539" elapsed="3.090912"/>
 </kw>
-<status status="PASS" start="2025-02-12T00:28:24.339993" elapsed="5.350230"/>
+<status status="PASS" start="2025-02-16T18:59:30.175541" elapsed="6.147272"/>
 </test>
-<doc>O usuário informa suas credenciais de acesso e submete o formulário de login</doc>
-<status status="PASS" start="2025-02-12T00:28:18.926921" elapsed="10.766879"/>
+<test id="s1-s2-s3-t3" name="Email deve ser requerido" line="13">
+<kw name="Abrir navegador" owner="base" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:36.325020" level="INFO">Opening browser 'chrome' to base url 'http://ninjaplus-web:5000/login'.</msg>
+<arg>${DEFAULT_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-02-16T18:59:36.324691" elapsed="2.359370"/>
+</kw>
+<kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
+<arg>10</arg>
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<status status="PASS" start="2025-02-16T18:59:38.684433" elapsed="0.001656"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-02-16T18:59:38.686383" elapsed="0.040046"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:36.324415" elapsed="2.402178"/>
+</kw>
+<kw name="Logando com credenciais inválidas devo ver uma mensagem de alerta" owner="login">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:38.728765" level="INFO">Typing text '' into text field 'id:emailId'.</msg>
+<arg>${INPUT_EMAIL}</arg>
+<arg>${email}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:38.728360" elapsed="0.115080"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:38.844358" level="INFO">Typing password into text field 'css:input[name=password]'.</msg>
+<msg time="2025-02-16T18:59:38.914305" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>${INPUT_PASS}</arg>
+<arg>${pass}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:38.843804" elapsed="0.193316"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:39.037617" level="INFO">Clicking button 'id:login'.</msg>
+<arg>${BUTTON_SUBMIT}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:39.037382" elapsed="0.112966"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>${DIV_ALERT}</arg>
+<arg>${expected_message}</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2025-02-16T18:59:39.150767" elapsed="0.040727"/>
+</kw>
+<arg>${EMPTY}</arg>
+<arg>pwd123</arg>
+<arg>Opps. Cadê o email?</arg>
+<status status="PASS" start="2025-02-16T18:59:38.727051" elapsed="0.464650"/>
+</kw>
+<kw name="Fechar navegador" owner="base" type="TEARDOWN">
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:40.114270" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-5.png"&gt;&lt;img src="selenium-screenshot-5.png" width="800px"&gt;&lt;/a&gt;</msg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2025-02-16T18:59:39.193028" elapsed="0.921350"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-02-16T18:59:40.114539" elapsed="2.242933"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:39.192445" elapsed="3.165204"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:36.323813" elapsed="6.034134"/>
+</test>
+<test id="s1-s2-s3-t4" name="Senha deve ser requerido" line="14">
+<kw name="Abrir navegador" owner="base" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:42.361262" level="INFO">Opening browser 'chrome' to base url 'http://ninjaplus-web:5000/login'.</msg>
+<arg>${DEFAULT_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-02-16T18:59:42.360785" elapsed="2.283000"/>
+</kw>
+<kw name="Set Selenium Implicit Wait" owner="SeleniumLibrary">
+<arg>10</arg>
+<doc>Sets the implicit wait value used by Selenium.</doc>
+<status status="PASS" start="2025-02-16T18:59:44.644114" elapsed="0.001555"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-02-16T18:59:44.645998" elapsed="0.030869"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:42.360144" elapsed="2.316886"/>
+</kw>
+<kw name="Logando com credenciais inválidas devo ver uma mensagem de alerta" owner="login">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:44.679352" level="INFO">Typing text 'estanqueiro@ninjaplus.com' into text field 'id:emailId'.</msg>
+<arg>${INPUT_EMAIL}</arg>
+<arg>${email}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:44.678952" elapsed="0.249909"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:44.929695" level="INFO">Typing password into text field 'css:input[name=password]'.</msg>
+<msg time="2025-02-16T18:59:44.981980" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>${INPUT_PASS}</arg>
+<arg>${pass}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:44.929223" elapsed="0.114502"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:45.044687" level="INFO">Clicking button 'id:login'.</msg>
+<arg>${BUTTON_SUBMIT}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-02-16T18:59:45.044239" elapsed="0.102256"/>
+</kw>
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>${DIV_ALERT}</arg>
+<arg>${expected_message}</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2025-02-16T18:59:45.146715" elapsed="0.037650"/>
+</kw>
+<arg>estanqueiro@ninjaplus.com</arg>
+<arg>${EMPTY}</arg>
+<arg>Opps. Cadê a senha?</arg>
+<status status="PASS" start="2025-02-16T18:59:44.677572" elapsed="0.506925"/>
+</kw>
+<kw name="Fechar navegador" owner="base" type="TEARDOWN">
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2025-02-16T18:59:46.143813" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-6.png"&gt;&lt;img src="selenium-screenshot-6.png" width="800px"&gt;&lt;/a&gt;</msg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2025-02-16T18:59:45.185349" elapsed="0.958576"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-02-16T18:59:46.144110" elapsed="2.192679"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:45.185028" elapsed="3.152104"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:59:42.359196" elapsed="5.978466"/>
+</test>
+<doc>O usuário informa credenciais incorretas e é notificado com uma mensagem de alerta</doc>
+<status status="PASS" start="2025-02-16T18:59:23.984643" elapsed="24.355506"/>
 </suite>
-<status status="PASS" start="2025-02-12T00:28:02.253442" elapsed="27.445202"/>
+<status status="PASS" start="2025-02-16T18:59:04.422172" elapsed="43.922149"/>
+</suite>
+<status status="PASS" start="2025-02-16T18:59:02.464703" elapsed="45.881741"/>
 </suite>
 <statistics>
 <total>
-<stat pass="5" fail="0" skip="0">All Tests</stat>
+<stat pass="15" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat name="Specs" id="s1" pass="5" fail="0" skip="0">Specs</stat>
-<stat name="Login" id="s1-s1" pass="3" fail="0" skip="0">Specs.Login</stat>
-<stat name="Login Sem Sucesso" id="s1-s2" pass="2" fail="0" skip="0">Specs.Login Sem Sucesso</stat>
+<stat name="Specs" id="s1" pass="15" fail="0" skip="0">Specs</stat>
+<stat name="Api" id="s1-s1" pass="9" fail="0" skip="0">Specs.Api</stat>
+<stat name="Delete User" id="s1-s1-s1" pass="2" fail="0" skip="0">Specs.Api.Delete User</stat>
+<stat name="Get User" id="s1-s1-s2" pass="2" fail="0" skip="0">Specs.Api.Get User</stat>
+<stat name="Post User" id="s1-s1-s3" pass="4" fail="0" skip="0">Specs.Api.Post User</stat>
+<stat name="Put User" id="s1-s1-s4" pass="1" fail="0" skip="0">Specs.Api.Put User</stat>
+<stat name="Web" id="s1-s2" pass="6" fail="0" skip="0">Specs.Web</stat>
+<stat name="Cadastro" id="s1-s2-s1" pass="1" fail="0" skip="0">Specs.Web.Cadastro</stat>
+<stat name="Login Com Sucesso" id="s1-s2-s2" pass="1" fail="0" skip="0">Specs.Web.Login Com Sucesso</stat>
+<stat name="Login Sem Sucesso" id="s1-s2-s3" pass="4" fail="0" skip="0">Specs.Web.Login Sem Sucesso</stat>
 </suite>
 </statistics>
 <errors>
