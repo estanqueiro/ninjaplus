@@ -6,6 +6,7 @@ docker pull postgres
 docker pull dpage/pgadmin4
 docker pull qaninja/ninjaplus-api
 docker pull qaninja/ninjaplus-web
+docker pull qaninja/python-wd
 
 ### Criar a rede  Docker
 
@@ -29,6 +30,8 @@ docker run --name ninjaplus-web --network=skynet -e "VUE_APP_API=http://ninjaplu
 
 ### Subir o Jenkins
 docker run -d -v jenkins_home:/var/jenkins_home -p 8080:8080 -p 50000:50000 --restart=on-failure jenkins/jenkins:lts-jdk17
+
+### Subir o python
 
 ### Entrar no docker do jenkins para pegar senha do administrador
 docker exec -it jenkins sh
